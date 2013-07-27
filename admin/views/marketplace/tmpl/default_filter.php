@@ -15,7 +15,7 @@ JHtml::_('bootstrap.tooltip');
 	<div class="input-append">
 		
 		<input type="text" title="<?php echo JText::_('COM_MARKETPLACE_'.$this->getName().'_FILTER_SEARCH_DESC'); ?>" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" id="filter_search" placeholder="<?php echo JText::_('COM_MARKETPLACE_'.$this->getName().'_FILTER_SEARCH_DESC'); ?>" class="search-query" name="filter_search" style="border-right: 0;">
-		<?php echo MarketplaceHelperButton::collection($this->browse); ?>
+		<?php echo MarketplaceHelperButton::collection($this->collection); ?>
 		<button class="btn" type="submit"><i class="icon-search"></i></button>
 	</div>
 	</div>

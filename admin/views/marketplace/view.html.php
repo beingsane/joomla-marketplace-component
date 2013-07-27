@@ -75,11 +75,10 @@ class MarketplaceViewMarketplace extends JViewLegacy
 	{
 		$canDo	= MarketplaceHelper::getActions();
 		$type = $this->state->get('filter.type');
-		$browse = $this->state->get('filter.browse');
-		$suffix = empty($browse) ? 'EXTENSIONS' : strtoupper($browse);
-		$this->browse = JText::_('COM_MARKETPLACE_COLLECTION_'.$suffix);
+		$collection = $this->state->get('filter.collection');
+		$this->collection = ucfirst($collection);
 		
-		JToolBarHelper::title(JText::sprintf('COM_MARKETPLACE_HEADER_' . $this->getName(),$this->browse), 'marketplace');
+		JToolBarHelper::title(JText::sprintf('COM_MARKETPLACE_HEADER_' . $this->getName(),$this->collection), 'marketplace');
 		
 		$repository_id = $this->state->get('filter.store_repository_id');
 		$countStores = MarketplaceHelper::getExtensionTotalStores();

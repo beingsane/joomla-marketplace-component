@@ -19,19 +19,6 @@ defined('_JEXEC') or die;
 class MarketplaceHelperButton
 {
 	/**
-	 * List of collections
-	 * 
-	 * @var		Array
-	 * 
-	 * @since 	3.1
-	 */
-	static public $collections = array(
-		'extensions' => '',
-		'templates' => 'template',
-		'translations' => 'language'
-	);
-
-	/**
 	 * Build collection list
 	 * 
 	 * @since	3.1
@@ -44,11 +31,10 @@ class MarketplaceHelperButton
 		$html .= '<span class="caret"></span>';
 		$html .= '</button>';
 		$html .= '<ul class="dropdown-menu">';
-		foreach (self::$collections as $collection => $extension) {
+		foreach (MarketplaceHelper::getCollections() as $collection) {
 			$html .= '<li>';
-			$html .= '<a onclick="document.id(\'filter_browse\').value=\''.$extension.'\';document.id(\'adminForm\').submit();" href="javascript:void(0);">';
-			$suffix = empty($extension) ? 'EXTENSIONS' : strtoupper($extension);
-			$html .= JText::sprintf('COM_MARKETPLACE_TEXT_BROWSE_SELECT',JText::_('COM_MARKETPLACE_COLLECTION_'.$suffix ));
+			$html .= '<a onclick="document.id(\'filter_collection\').value=\''.$collection->value.'\';document.id(\'adminForm\').submit();" href="javascript:void(0);">';
+			$html .= JText::sprintf('COM_MARKETPLACE_TEXT_BROWSE_SELECT',ucfirst($collection->text));
 			$html .= '</a>';
 			$html .= '</li>';
 		}

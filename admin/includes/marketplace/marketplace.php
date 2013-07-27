@@ -122,7 +122,8 @@ class JMarketplace extends JAdapter
 						$uid = $update
 							->find(
 							array(
-								'element' => strtolower($current_update->get('element')), 'type' => strtolower($current_update->get('type')),
+								'element' => strtolower($current_update->get('element')), 
+								'type' => strtolower($current_update->get('type')),
 								'client_id' => strtolower($current_update->get('client_id')),
 								'folder' => strtolower($current_update->get('folder'))
 							)
@@ -131,7 +132,8 @@ class JMarketplace extends JAdapter
 						$eid = $extension
 							->find(
 							array(
-								'element' => strtolower($current_update->get('element')), 'type' => strtolower($current_update->get('type')),
+								'element' => strtolower($current_update->get('element')), 
+								'type' => strtolower($current_update->get('type')),
 								'client_id' => strtolower($current_update->get('client_id')),
 								'folder' => strtolower($current_update->get('folder'))
 							)

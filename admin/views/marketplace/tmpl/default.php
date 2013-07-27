@@ -37,10 +37,10 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 		<?php else: ?>
 			<?php echo $this->loadTemplate('filter'); ?>
 			<?php if (count($this->items) || $this->escape($this->state->get('filter.search'))) : ?>
-				<?php if ($this->state->get('filter.browse') == 'template'): ?>
-					<?php echo $this->loadTemplate('templates'); ?>
-				<?php else: ?>
+				<?php if (strpos($this->collection,'template') === false): ?>
 					<?php echo $this->loadTemplate('extensions'); ?>
+				<?php else: ?>
+					<?php echo $this->loadTemplate('templates'); ?>
 				<?php endif; ?>
 				<div class="row-fluid">
 					<div class="span12 pagination pagination-centered">
@@ -51,7 +51,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 				    
 			<?php endif; ?>
 		<?php endif; ?>
-			<input type="hidden" name="filter_browse" id="filter_browse" value="<?php echo $this->state->get('filter.browse'); ?>" />
+			<input type="hidden" name="filter_collection" id="filter_collection" value="<?php echo $this->state->get('filter.collection'); ?>" />
 			<input type="hidden" name="task" value="" />
 			<input type="hidden" name="boxchecked" value="0" />
 			<input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />

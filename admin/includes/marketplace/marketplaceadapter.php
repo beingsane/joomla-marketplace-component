@@ -46,7 +46,7 @@ class JMarketplaceAdapter extends JAdapterInstance
 	 * @var    array
 	 * @since  12.1
 	 */
-	protected $updatecols = array('NAME', 'ELEMENT', 'TYPE', 'FOLDER', 'CLIENT', 'VERSION', 'DESCRIPTION', 'INFOURL', 'IMAGE', 'AUTHOR', 'RATING', 'REVIEWS');
+	protected $updatecols = array('IMAGE', 'ELEMENT', 'COLLECTION', 'TYPE', 'FOLDER', 'CLIENT', 'CATEGORY', 'AUTHOR', 'PLAN', 'NAME', 'RATING', 'REVIEWS', 'URL');
 
 	/**
 	 * Gets the reference to the current direct parent

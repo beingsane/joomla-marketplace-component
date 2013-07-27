@@ -34,7 +34,7 @@ class MarketplaceModelExtensions extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'a.store_extension_id','a.name','a.type','a.version','a.infourl','a.detailsurl','a.element','a.type','a.folder','a.image','a.description','a.author'
+				'a.store_extension_id', 'a.name', 'a.type', 'a.url', 'a.element', 'a.collection', 'a.author', 'a.image', 'a.plan', 'a.reviews', 'a.rating', 'a.category'
 			);
 		}
 
@@ -110,7 +110,7 @@ class MarketplaceModelExtensions extends JModelList
 		$query  = $db->getQuery(true);
 
 		// Select the required fields from the updates table
-		$query->select('a.store_extension_id, a.name, a.type, a.version, a.infourl, a.detailsurl, a.element, a.type, a.folder, a.description, a.author, a.image, a.plan, a.reviews, a.rating, a.category');
+		$query->select('a.store_extension_id, a.name, a.type, a.url, a.element, a.type, a.collection, a.author, a.image, a.plan, a.reviews, a.rating, a.category');
 
 		$query->from($db->quoteName('#__marketplace_extensions').' AS a');
 		
@@ -136,26 +136,25 @@ class MarketplaceModelExtensions extends JModelList
 		if ($store_repository_id>0) {
 			$query->where('a.store_repository_id='.$db->quote($store_repository_id));
 		}
-		$author = $this->getState('filter.author');
-		if (!empty($author)) {
-			$query->where('a.author='.$db->quote($author));
+		
+		$collection = $this->getState('filter.collection');
+		if (!empty($collection)) {
+			$query->where('a.collection='.$db->quote($collection));
 		}
-		$category = $this->getState('filter.category');
-		if (!empty($category)) {
-			$query->where('a.category='.$db->quote($category));
-		}
+		
 		$type = $this->getState('filter.type');
 		if (!empty($type)) {
 			$query->where('a.type='.$db->quote($type));
 		}
 		
-		$browse = $this->getState('filter.browse');
-		if ($browse == '') {
-			$collections = array_slice(array_values(MarketplaceHelperButton::$collections),1);
-			$in = '"'.implode('","',$collections).'"';
-			$query->where('a.type NOT IN ('.$in.')');
-		} else {
-			$query->where('a.type='.$db->quote($browse));
+		$category = $this->getState('filter.category');
+		if (!empty($category)) {
+			$query->where('a.category='.$db->quote($category));
+		}
+		
+		$author = $this->getState('filter.author');
+		if (!empty($author)) {
+			$query->where('a.author='.$db->quote($author));
 		}
 		
 		$plan = $this->getState('filter.plan');
@@ -183,9 +182,10 @@ class MarketplaceModelExtensions extends JModelList
 		// Compile the store id.
 		$id	.= ':' . $this->getState('filter.search');
 		$id	.= ':' . $this->getState('filter.store_repository_id');
-		$id	.= ':' . $this->getState('filter.author');
-		$id	.= ':' . $this->getState('filter.category');
+		$id	.= ':' . $this->getState('filter.collection');
 		$id	.= ':' . $this->getState('filter.type');
+		$id	.= ':' . $this->getState('filter.category');
+		$id	.= ':' . $this->getState('filter.author');
 		$id	.= ':' . $this->getState('filter.plan');
 		
 		return parent::getStoreId($id);
@@ -212,24 +212,24 @@ class MarketplaceModelExtensions extends JModelList
 		$repository_id = $app->getUserStateFromRequest($this->context.'.filter.store_repository_id', 'filter_store_repository_id');
 		$this->setState('filter.store_repository_id', $repository_id);
 		
-		$author = $app->getUserStateFromRequest($this->context.'.filter.author', 'filter_author');
-		$this->setState('filter.author', $author);
+		$collection = $app->getUserStateFromRequest($this->context.'.filter.collection', 'filter_collection');
+		$this->setState('filter.collection', $collection);
 		
+		$type = $app->getUserStateFromRequest($this->context.'.filter.type', 'filter_type');
+		$this->setState('filter.type', $type);
+
 		$category = $app->getUserStateFromRequest($this->context.'.filter.category', 'filter_category');
 		$this->setState('filter.category', $category);
-		
-		$browse = $app->getUserStateFromRequest($this->context.'.filter.browse', 'filter_browse');
-		$this->setState('filter.browse', $browse);
-		
-		$type = $app->getUserStateFromRequest($this->context.'.filter.type', 'filter_type', $browse);
-		$this->setState('filter.type', $type);
+
+		$author = $app->getUserStateFromRequest($this->context.'.filter.author', 'filter_author');
+		$this->setState('filter.author', $author);
 		
 		$plan = $app->getUserStateFromRequest($this->context.'.filter.plan', 'filter_plan');
 		$this->setState('filter.plan', $plan);
 
 		$this->setState('extension_message', $app->getUserState($this->context.'.extension_message'));
 		
-		$app->setUserState('global.list.limit', ($browse == 'template') ? 18 : 16 );
+		$app->setUserState('global.list.limit', (strpos($collection,'template') === false) ? 16 : 18 );
 
 		parent::populateState($ordering, $direction);
 	}
