@@ -108,7 +108,7 @@ class MarketplaceHelper
 		$collections = array_slice(array_values(MarketplaceHelperButton::$collections),1);
 		$in = '"'.implode('","',$collections).'"';
 		if (in_array($type,$collections)) {
-			$wheres = 'e.type IN ('.$in.')';
+			$wheres = 'e.type IN ('.$db->quote($type).')';
 		} else {
 			$wheres = 'e.type NOT IN ('.$in.')';
 		}
@@ -178,7 +178,7 @@ class MarketplaceHelper
 		$collections = array_slice(array_values(MarketplaceHelperButton::$collections),1);
 		$in = '"'.implode('","',$collections).'"';
 		if (in_array($type,$collections)) {
-			$wheres = 'e.type IN ('.$in.')';
+			$wheres = 'e.type IN ('.$db->quote($type).')';
 		} else {
 			$wheres = 'e.type NOT IN ('.$in.')';
 		}
@@ -225,6 +225,8 @@ class MarketplaceHelper
 	 */
 	public static function getExtensionCategories()
 	{
+		$db 	= JFactory::getDbo();
+		$query 	= $db->getQuery(true);
 		$input = JFactory::getApplication()->input;
 		
 		$type = $input->getCmd('filter_browse');
@@ -232,13 +234,12 @@ class MarketplaceHelper
 		$collections = array_slice(array_values(MarketplaceHelperButton::$collections),1);
 		$in = '"'.implode('","',$collections).'"';
 		if (in_array($type,$collections)) {
-			$wheres = 'e.type IN ('.$in.')';
+			$wheres = 'e.type IN ('.$db->quote($type).')';
 		} else {
 			$wheres = 'e.type NOT IN ('.$in.')';
 		}
 		
-		$db 	= JFactory::getDbo();
-		$query 	= $db->getQuery(true);
+		
 		$query->select('DISTINCT e.category');
 		$query->from('#__marketplace_extensions AS e');
 		$query->where($wheres);
