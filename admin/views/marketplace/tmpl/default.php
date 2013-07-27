@@ -31,7 +31,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 			    <h3><?php echo JText::_('COM_MARKETPLACE'); ?></h3>
 			    <p><?php echo JText::_('COM_MARKETPLACE_MARKETPLACE_INTRODUCTION'); ?></p>
 			    <p>
-			    <a onclick="Joomla.submitbutton('extensions.update')" class="btn btn-primary btn-large"><i class="icon-refresh"></i>&nbsp;&nbsp;<?php echo JText::_('COM_MARKETPLACE_TOOLBAR_FIND_EXTENSIONS'); ?></a>
+			    <a onclick="Joomla.submitbutton('marketplace.findextensions')" class="btn btn-primary btn-large"><i class="icon-refresh"></i>&nbsp;&nbsp;<?php echo JText::_('COM_MARKETPLACE_TOOLBAR_FIND_EXTENSIONS'); ?></a>
 			    </p>
 			    </div>
 		<?php else: ?>
