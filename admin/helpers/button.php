@@ -27,7 +27,8 @@ class MarketplaceHelperButton
 	 */
 	static public $collections = array(
 		'extensions' => '',
-		'templates' => 'template'
+		'templates' => 'template',
+		'translations' => 'language'
 	);
 
 	/**
@@ -45,7 +46,10 @@ class MarketplaceHelperButton
 		$html .= '<ul class="dropdown-menu">';
 		foreach (self::$collections as $collection => $extension) {
 			$html .= '<li>';
-			$html .= '<a onclick="document.id(\'filter_browse\').value=\''.$extension.'\';document.id(\'adminForm\').submit();" href="javascript:void(0);">'.JText::sprintf('COM_MARKETPLACE_TEXT_BROWSE_SELECT',JText::_('COM_MARKETPLACE_COLLECTION_'.$collection)).'</a>';
+			$html .= '<a onclick="document.id(\'filter_browse\').value=\''.$extension.'\';document.id(\'adminForm\').submit();" href="javascript:void(0);">';
+			$suffix = empty($extension) ? 'EXTENSIONS' : strtoupper($extension);
+			$html .= JText::sprintf('COM_MARKETPLACE_TEXT_BROWSE_SELECT',JText::_('COM_MARKETPLACE_COLLECTION_'.$suffix ));
+			$html .= '</a>';
 			$html .= '</li>';
 		}
 		$html .= '</ul>';

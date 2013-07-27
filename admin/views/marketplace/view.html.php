@@ -75,7 +75,9 @@ class MarketplaceViewMarketplace extends JViewLegacy
 	{
 		$canDo	= MarketplaceHelper::getActions();
 		$type = $this->state->get('filter.type');
-		$this->browse = ($this->state->get('filter.browse') == 'template') ? JText::_('COM_MARKETPLACE_COLLECTION_TEMPLATES') : JText::_('COM_MARKETPLACE_COLLECTION_EXTENSIONS') ;
+		$browse = $this->state->get('filter.browse');
+		$suffix = empty($browse) ? 'EXTENSIONS' : strtoupper($browse);
+		$this->browse = JText::_('COM_MARKETPLACE_COLLECTION_'.$suffix);
 		
 		JToolBarHelper::title(JText::sprintf('COM_MARKETPLACE_HEADER_' . $this->getName(),$this->browse), 'marketplace');
 		
