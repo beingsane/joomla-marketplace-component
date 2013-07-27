@@ -150,10 +150,12 @@ class MarketplaceModelExtensions extends JModelList
 		}
 		
 		$browse = $this->getState('filter.browse');
-		if ($browse == 'template') {
-			$query->where('a.type="template"');
+		if ($browse == '') {
+			$collections = array_slice(array_values(MarketplaceHelperButton::$collections),1);
+			$in = '"'.implode('","',$collections).'"';
+			$query->where('a.type NOT IN ('.$in.')');
 		} else {
-			$query->where('a.type!="template"');
+			$query->where('a.type='.$db->quote($browse));
 		}
 		
 		$plan = $this->getState('filter.plan');
