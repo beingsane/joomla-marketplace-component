@@ -31,6 +31,11 @@ class MarketplaceHelperButton
 		$html .= '<span class="caret"></span>';
 		$html .= '</button>';
 		$html .= '<ul class="dropdown-menu">';
+			$html .= '<li>';
+			$html .= '<a onclick="document.id(\'filter_collection\').value=\'\';document.id(\'adminForm\').submit();" href="javascript:void(0);">';
+			$html .= JText::sprintf('COM_MARKETPLACE_TEXT_BROWSE_SELECT',JText::_('COM_MARKETPLACE_TYPE_COLLECTION'));
+			$html .= '</a>';
+			$html .= '</li>';
 		foreach (MarketplaceHelper::getCollections() as $collection) {
 			$html .= '<li>';
 			$html .= '<a onclick="document.id(\'filter_collection\').value=\''.$collection->value.'\';document.id(\'adminForm\').submit();" href="javascript:void(0);">';
