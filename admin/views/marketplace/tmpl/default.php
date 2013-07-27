@@ -37,7 +37,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 		<?php else: ?>
 			<?php echo $this->loadTemplate('filter'); ?>
 			<?php if (count($this->items) || $this->escape($this->state->get('filter.search'))) : ?>
-				<?php if (strpos($this->collection,'template') === false): ?>
+				<?php if (strpos($this->state->get('filter.collection'),'template') === false): ?>
 					<?php echo $this->loadTemplate('extensions'); ?>
 				<?php else: ?>
 					<?php echo $this->loadTemplate('templates'); ?>

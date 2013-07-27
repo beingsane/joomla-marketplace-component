@@ -59,9 +59,9 @@ class MarketplaceHelper
 	{
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_store_repository_id');
-		$type = $input->getCmd('filter_type','');
-		$category = $input->getCmd('filter_category','');
-		$author = $input->getCmd('filter_author','');
+		$type = $input->getString('filter_type','');
+		$category = $input->getString('filter_category','');
+		$author = $input->getString('filter_author','');
 		
 		$db 	= JFactory::getDbo();
 		$query 	= $db->getQuery(true);
@@ -100,10 +100,10 @@ class MarketplaceHelper
 	{
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_store_repository_id');
-		$collection = $input->getCmd('filter_collection','');
-		$type = $input->getCmd('filter_type','');
-		$category = $input->getCmd('filter_category','');
-		$author = $input->getCmd('filter_author','');
+		$collection = $input->getString('filter_collection','');
+		$type = $input->getString('filter_type','');
+		$category = $input->getString('filter_category','');
+		$author = $input->getString('filter_author','');
 		
 		$db 	= JFactory::getDbo();
 		$query 	= $db->getQuery(true);
@@ -164,10 +164,10 @@ class MarketplaceHelper
 	public static function getExtensionStores($state=1)
 	{
 		$input = JFactory::getApplication()->input;
-		$collection = $input->getCmd('filter_collection','');
-		$type = $input->getCmd('filter_type','');
-		$category = $input->getCmd('filter_category','');
-		$author = $input->getCmd('filter_author','');
+		$collection = $input->getString('filter_collection','');
+		$type = $input->getString('filter_type','');
+		$category = $input->getString('filter_category','');
+		$author = $input->getString('filter_author','');
 		
 		$db = JFactory::getDBO();
 		
@@ -213,9 +213,9 @@ class MarketplaceHelper
 	{
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_store_repository_id');
-		$collection = $input->getCmd('filter_collection','');
-		$category = $input->getCmd('filter_category','');
-		$author = $input->getCmd('filter_author','');
+		$collection = $input->getString('filter_collection','');
+		$category = $input->getString('filter_category','');
+		$author = $input->getString('filter_author','');
 		
 		$db 	= JFactory::getDbo();
 		$query 	= $db->getQuery(true);
@@ -256,9 +256,9 @@ class MarketplaceHelper
 	{
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_store_repository_id');
-		$collection = $input->getCmd('filter_collection','');
-		$type = $input->getCmd('filter_type','');
-		$category = $input->getCmd('filter_category','');
+		$collection = $input->getString('filter_collection','');
+		$type = $input->getString('filter_type','');
+		$category = $input->getString('filter_category','');
 		
 		$db 	= JFactory::getDbo();
 		$query = $db->getQuery(true);
@@ -324,9 +324,9 @@ class MarketplaceHelper
 	{	
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_store_repository_id');
-		$collection = $input->getCmd('filter_collection','');
-		$type = $input->getCmd('filter_type','');
-		$author = $input->getCmd('filter_author','');
+		$collection = $input->getString('filter_collection','');
+		$type = $input->getString('filter_type','');
+		$author = $input->getString('filter_author','');
 		
 		$db 	= JFactory::getDbo();
 		$query 	= $db->getQuery(true);
