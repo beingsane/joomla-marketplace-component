@@ -32,15 +32,17 @@ class MarketplaceModelExtension extends JModelLegacy
 		$extension = $this->getTable('marketplaceextensions','jtable');
 		$extension->load($extension_id);
 		
-		if (($extension->store_extension_id == 0 || $extension->plan != 'install') && !empty($extension->url)) {
+		if ($extension->store_extension_id == 0 || $extension->plan != 'install' || empty($extension->url)) {
 			return false;
 		}
 		
 		$update = new JUpdate;
 		$update->loadFromXML($extension->url);
-		$package_url = trim($update->get('downloadurl', false)->_data);
+		$package_url = $update->get('downloadurl', false);
 		if (!$package_url) {
 			return false;
+		} else {
+			$package_url = trim($package_url->_data);
 		}
 		
 		return $package_url;

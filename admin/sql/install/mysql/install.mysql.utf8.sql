@@ -13,6 +13,7 @@ CREATE TABLE `#__marketplace_extensions` (
   `folder` varchar(100) DEFAULT NULL,
   `client_id` tinyint(3) DEFAULT '0',
   `name` varchar(100) DEFAULT '',
+  `version` varchar(100) DEFAULT '',
   `reviews` int(11) NOT NULL DEFAULT '0',
   `rating` float(11,2) NOT NULL DEFAULT '0',
   `url` varchar(255) NOT NULL,

@@ -58,14 +58,16 @@ class MarketplaceHelperButton
 			switch (strtolower($extension->plan)) {
 				case 'register':
 					$btn_class = ' btn-warning';
-					$onclick = ' onclick="document.id(\'eid\').value=\''.$extension->store_extension_id.'\';Joomla.submitbutton(\'extension.install\');"';
+					$uri = JFactory::getUri($extension->url);
+					$uri->setVar('return',base64_encode(JFactory::getUri()->base()));
+					$onclick = ' onclick="window.open(\''.$uri.'\')"';
 					break;
 				case 'buy':
 					$btn_class = ' btn-success';
-					
 					break;
 				case 'install':
 					$btn_class = ' btn-primary';
+					$onclick = ' onclick="document.id(\'eid\').value=\''.$extension->store_extension_id.'\';Joomla.submitbutton(\'extension.install\');"';
 					break;
 				default:
 					$btn_class = '';
