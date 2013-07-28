@@ -16,7 +16,6 @@ JHtml::_('bootstrap.tooltip');
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn  = $this->escape($this->state->get('list.direction'));
 ?>
-
 	<form action="<?php echo JRoute::_(JFactory::getUri());?>" method="post" name="adminForm" id="adminForm" class="form-search">
 	<?php if (!empty( $this->sidebar)) : ?>
 		<div id="j-sidebar-container" class="span2">
@@ -51,6 +50,7 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 				    
 			<?php endif; ?>
 		<?php endif; ?>
+			<input type="hidden" name="eid" id="eid" value="0" />
 			<input type="hidden" name="filter_collection" id="filter_collection" value="<?php echo $this->state->get('filter.collection'); ?>" />
 			<input type="hidden" name="task" value="" />
 			<input type="hidden" name="boxchecked" value="0" />

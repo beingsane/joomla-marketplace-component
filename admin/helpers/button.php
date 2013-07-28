@@ -53,13 +53,16 @@ class MarketplaceHelperButton
 	static public function download($extension)
 	{	
 		$button = $extension->plan;
+		$onclick = '';
 		if ($extension->extension_id == 0) {
 			switch (strtolower($extension->plan)) {
 				case 'register':
 					$btn_class = ' btn-warning';
+					$onclick = ' onclick="document.id(\'eid\').value=\''.$extension->store_extension_id.'\';Joomla.submitbutton(\'extension.install\');"';
 					break;
 				case 'buy':
 					$btn_class = ' btn-success';
+					
 					break;
 				case 'install':
 					$btn_class = ' btn-primary';
@@ -73,7 +76,7 @@ class MarketplaceHelperButton
 			$button='installed';
 		}
 		
-		$html = '<button type="button" class="btn'.$btn_class.'">'.JText::_('COM_MARKETPLACE_MARKETPLACE_BUTTON_'.$button).'</button>';
+		$html = '<button'.$onclick.' type="button" class="btn'.$btn_class.'">'.JText::_('COM_MARKETPLACE_MARKETPLACE_BUTTON_'.$button).'</button>';
 		
 		return $html;
 	}
