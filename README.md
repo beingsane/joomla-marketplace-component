@@ -5,7 +5,7 @@ This is a marketplace extension for Joomla 3, that provide developers to extend 
 
 Install Workflow
 
-https://github.com/juliopontes/joomla-marketplace-component/wiki/Marketplace-Workflow
+https://github.com/juliopontes/joomla-marketplace-component/wiki/Marketplace-Installation
 
 App Study Group Recomendation
 
