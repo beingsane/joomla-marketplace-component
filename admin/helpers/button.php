@@ -64,6 +64,9 @@ class MarketplaceHelperButton
 					break;
 				case 'buy':
 					$btn_class = ' btn-success';
+					$uri = JFactory::getUri($extension->url);
+					$uri->setVar('return',base64_encode(JFactory::getUri()->base()));
+					$onclick = ' onclick="window.open(\''.$uri.'\')"';
 					break;
 				case 'install':
 					$btn_class = ' btn-primary';

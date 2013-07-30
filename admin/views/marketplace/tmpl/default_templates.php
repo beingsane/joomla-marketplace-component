@@ -14,7 +14,7 @@ defined('_JEXEC') or die;
 <div class="row-fluid">
 <?php endif; ?>
 <div class="span4 well well-small">
-	<img width="460" height="345" src="<?php echo $extension->image; ?>" class="img-rounded" />
+	<img src="<?php echo $extension->image; ?>" class="img-rounded" />
 	<h2><?php echo $extension->name; ?> <small><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_EXTENSIONS_INFO', $extension->author); ?></small></h2>
 	<small><?php echo MarketplaceHelperRating::rating($extension->rating); ?><div class="visible-phone"><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_REVIEWS_PHONE',$extension->reviews); ?></div><div class="visible-tablet visible-desktop"><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_REVIEWS_TABLET',$extension->reviews); ?></div></small>
 	<br />

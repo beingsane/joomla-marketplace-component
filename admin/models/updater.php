@@ -36,7 +36,7 @@ class MarketplaceModelUpdater extends JModelLegacy
 			$query->select('a.name, a.location');
 	
 			$query->from($db->quoteName('#__marketplace_repositories').' AS a');
-			$query->where('a.published>=0');
+			$query->where('a.published>=1');
 			
 			$db->setQuery($query);
 			$this->repositories = $db->loadAssocList();

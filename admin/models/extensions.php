@@ -34,7 +34,7 @@ class MarketplaceModelExtensions extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'a.store_extension_id', 'a.name', 'a.type', 'a.url', 'a.element', 'a.collection', 'a.author', 'a.image', 'a.plan', 'a.reviews', 'a.rating', 'a.category'
+				'a.store_extension_id', 'a.name', 'a.type', 'a.url', 'a.element', 'a.collection', 'a.author', 'a.image', 'a.plan', 'a.reviews', 'a.rating', 'a.category', 'a.display'
 			);
 		}
 
@@ -110,7 +110,7 @@ class MarketplaceModelExtensions extends JModelList
 		$query  = $db->getQuery(true);
 
 		// Select the required fields from the updates table
-		$query->select('a.store_extension_id, a.name, a.type, a.url, a.element, a.type, a.collection, a.author, a.image, a.plan, a.reviews, a.rating, a.category');
+		$query->select('a.store_extension_id, a.name, a.type, a.url, a.element, a.type, a.collection, a.display, a.author, a.image, a.plan, a.reviews, a.rating, a.category');
 
 		$query->from($db->quoteName('#__marketplace_extensions').' AS a');
 		
@@ -229,7 +229,9 @@ class MarketplaceModelExtensions extends JModelList
 
 		$this->setState('extension_message', $app->getUserState($this->context.'.extension_message'));
 		
-		$app->setUserState('global.list.limit', (strpos($collection,'template') === false) ? 16 : 18 );
+		$display = $app->getUserStateFromRequest($this->context.'.display', 'display');
+		
+		$app->setUserState('global.list.limit', ($display == 'template') ? 16 : 18 );
 
 		parent::populateState($ordering, $direction);
 	}

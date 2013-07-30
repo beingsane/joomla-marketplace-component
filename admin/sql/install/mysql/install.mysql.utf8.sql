@@ -6,6 +6,7 @@ CREATE TABLE `#__marketplace_extensions` (
   `image` varchar(255) DEFAULT NULL,
   `element` varchar(100) DEFAULT '',
   `collection` varchar(100) DEFAULT '',
+  `display` varchar(10) DEFAULT '',
   `type` varchar(100) DEFAULT '',
   `category` varchar(100) DEFAULT NULL,
   `author` varchar(100) DEFAULT NULL,
