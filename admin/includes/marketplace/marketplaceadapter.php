@@ -33,12 +33,12 @@ class JMarketplaceAdapter extends JAdapterInstance
 	protected $stack = array('base');
 
 	/**
-	 * ID of store site
+	 * ID of repository site
 	 *
 	 * @var    string
 	 * @since  12.1
 	 */
-	protected $storeSiteId = 0;
+	protected $marketplaceRepositoryId = 0;
 
 	/**
 	 * Columns in the extensions table to be updated
@@ -46,7 +46,7 @@ class JMarketplaceAdapter extends JAdapterInstance
 	 * @var    array
 	 * @since  12.1
 	 */
-	protected $updatecols = array('IMAGE', 'ELEMENT', 'COLLECTION', 'TYPE', 'FOLDER', 'CLIENT', 'CATEGORY', 'AUTHOR', 'PLAN', 'NAME', 'RATING', 'REVIEWS', 'URL');
+	protected $updatecols = array('IMAGE', 'ELEMENT', 'COLLECTION', 'TYPE', 'FOLDER', 'CLIENT', 'CATEGORY', 'AUTHOR', 'PLAN', 'NAME', 'DESCRIPTION', 'RATING', 'REVIEWS', 'BUTTONURL', 'AUTHORURL', 'INFOURL');
 
 	/**
 	 * Gets the reference to the current direct parent

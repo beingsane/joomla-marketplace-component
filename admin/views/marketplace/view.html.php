@@ -80,7 +80,7 @@ class MarketplaceViewMarketplace extends JViewLegacy
 		
 		JToolBarHelper::title(JText::sprintf('COM_MARKETPLACE_HEADER_' . $this->getName(),$this->collection), 'marketplace');
 		
-		$repository_id = $this->state->get('filter.store_repository_id');
+		$repository_id = $this->state->get('filter.marketplace_repository_id');
 		$countStores = MarketplaceHelper::getExtensionTotalStores();
 		$stores = MarketplaceHelper::getExtensionStores();
 		
@@ -100,7 +100,7 @@ class MarketplaceViewMarketplace extends JViewLegacy
 		{
 			JHtmlSidebar::addFilter(
 				JText::_('COM_MARKETPLACE_VALUE_REPOSITORY_SELECT'),
-				'filter_store_repository_id',
+				'filter_marketplace_repository_id',
 				JHtml::_('select.options', $stores, 'value', 'text', $repository_id, true)
 			);
 			

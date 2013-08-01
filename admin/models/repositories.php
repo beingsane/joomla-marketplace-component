@@ -34,7 +34,7 @@ class MarketplaceModelRepositories extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'a.store_repository_id',
+				'a.marketplace_repository_id',
 				'a.name', 'a.location', 'a.type', 'a.published', 'a.last_check_timestamp'
 			);
 		}
@@ -53,7 +53,7 @@ class MarketplaceModelRepositories extends JModelList
 		$query  = $db->getQuery(true);
 
 		// Select the required fields from the updates table
-		$query->select('a.store_repository_id, a.name, a.location, a.type, a.published, a.last_check_timestamp');
+		$query->select('a.marketplace_repository_id, a.name, a.location, a.type, a.published, a.last_check_timestamp');
 
 		$query->from($db->quoteName('#__marketplace_repositories').' AS a');
 

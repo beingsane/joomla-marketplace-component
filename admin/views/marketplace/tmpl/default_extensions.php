@@ -15,10 +15,10 @@ defined('_JEXEC') or die;
 <?php endif; ?>
 <div class="span3 well well-small">
 		<div class="span3">
-			<img class="img-rounded" src="<?php echo $extension->image; ?>" />
+			<a href="index.php?option=com_marketplace&view=extension&id=<?php echo $extension->marketplace_extension_id; ?>"><img class="img-rounded" src="<?php echo $extension->image; ?>" /></a>
 		</div>
 		<div class="span6">
-			<strong><?php echo $extension->name; ?></strong>
+			<a href="index.php?option=com_marketplace&view=extension&id=<?php echo $extension->marketplace_extension_id; ?>"><strong><?php echo $extension->name; ?></strong></a>
 			<br />
 			<i class="icon-user"></i><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_EXTENSIONS_INFO', $extension->author); ?>
 			<br />

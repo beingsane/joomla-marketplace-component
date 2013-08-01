@@ -21,7 +21,7 @@ class JTableMarketplaceextensions extends JTable {
      * @param JDatabase A database connector object
      */
     public function __construct(&$db) {
-        parent::__construct('#__marketplace_extensions', 'store_extension_id', $db);
+        parent::__construct('#__marketplace_extensions', 'marketplace_extension_id', $db);
     }
    
 	/**

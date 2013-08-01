@@ -34,7 +34,7 @@ class MarketplaceModelExtensions extends JModelList
 		if (empty($config['filter_fields']))
 		{
 			$config['filter_fields'] = array(
-				'a.store_extension_id', 'a.name', 'a.type', 'a.url', 'a.element', 'a.collection', 'a.author', 'a.image', 'a.plan', 'a.reviews', 'a.rating', 'a.category', 'a.display'
+				'a.marketplace_extension_id', 'a.name', 'a.type', 'a.buttonurl', 'a.element', 'a.collection', 'a.author', 'a.image', 'a.plan', 'a.reviews', 'a.rating', 'a.category', 'a.display'
 			);
 		}
 
@@ -110,13 +110,13 @@ class MarketplaceModelExtensions extends JModelList
 		$query  = $db->getQuery(true);
 
 		// Select the required fields from the updates table
-		$query->select('a.store_extension_id, a.name, a.type, a.url, a.element, a.type, a.collection, a.display, a.author, a.image, a.plan, a.reviews, a.rating, a.category');
+		$query->select('a.marketplace_extension_id, a.name, a.type, a.buttonurl, a.element, a.type, a.collection, a.display, a.author, a.image, a.plan, a.reviews, a.rating, a.category');
 
 		$query->from($db->quoteName('#__marketplace_extensions').' AS a');
 		
 		// Join store repository
-		$query->select('s.name AS store_repository_name');
-		$query->join('LEFT', $db->quoteName('#__marketplace_repositories').' AS s ON s.store_repository_id = a.store_repository_id');
+		$query->select('s.name AS marketplace_repository_name');
+		$query->join('LEFT', $db->quoteName('#__marketplace_repositories').' AS s ON s.marketplace_repository_id = a.marketplace_repository_id');
 		
 		// Join installed extensions
 		$query->select('e.extension_id');
@@ -132,9 +132,9 @@ class MarketplaceModelExtensions extends JModelList
 			$query->where('(a.name LIKE ' . $search . ')');
 		}
 		
-		$store_repository_id = $this->getState('filter.store_repository_id');
-		if ($store_repository_id>0) {
-			$query->where('a.store_repository_id='.$db->quote($store_repository_id));
+		$marketplace_repository_id = $this->getState('filter.marketplace_repository_id');
+		if ($marketplace_repository_id>0) {
+			$query->where('a.marketplace_repository_id='.$db->quote($marketplace_repository_id));
 		}
 		
 		$collection = $this->getState('filter.collection');
@@ -181,7 +181,7 @@ class MarketplaceModelExtensions extends JModelList
 	{
 		// Compile the store id.
 		$id	.= ':' . $this->getState('filter.search');
-		$id	.= ':' . $this->getState('filter.store_repository_id');
+		$id	.= ':' . $this->getState('filter.marketplace_repository_id');
 		$id	.= ':' . $this->getState('filter.collection');
 		$id	.= ':' . $this->getState('filter.type');
 		$id	.= ':' . $this->getState('filter.category');
@@ -209,8 +209,8 @@ class MarketplaceModelExtensions extends JModelList
 		$search = $app->getUserStateFromRequest($this->context.'.filter.search', 'filter_search');
 		$this->setState('filter.search', $search);
 		
-		$repository_id = $app->getUserStateFromRequest($this->context.'.filter.store_repository_id', 'filter_store_repository_id');
-		$this->setState('filter.store_repository_id', $repository_id);
+		$repository_id = $app->getUserStateFromRequest($this->context.'.filter.marketplace_repository_id', 'filter_marketplace_repository_id');
+		$this->setState('filter.marketplace_repository_id', $repository_id);
 		
 		$collection = $app->getUserStateFromRequest($this->context.'.filter.collection', 'filter_collection');
 		$this->setState('filter.collection', $collection);

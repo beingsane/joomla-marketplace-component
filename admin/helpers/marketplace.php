@@ -58,7 +58,7 @@ class MarketplaceHelper
 	public static function getCollections()
 	{
 		$input = JFactory::getApplication()->input;
-		$repository_id = $input->getInt('filter_store_repository_id');
+		$repository_id = $input->getInt('filter_marketplace_repository_id');
 		$type = $input->getString('filter_type','');
 		$category = $input->getString('filter_category','');
 		$author = $input->getString('filter_author','');
@@ -68,7 +68,7 @@ class MarketplaceHelper
 		$query->select('DISTINCT e.collection');
 		$query->from('#__marketplace_extensions AS e');
 		if ($repository_id>0) {
-			$query->where('e.store_repository_id='.$db->quote($repository_id));
+			$query->where('e.marketplace_repository_id='.$db->quote($repository_id));
 		}
 		if (!empty($type)) {
 			$query->where('e.type='.$db->quote($type));
@@ -90,7 +90,7 @@ class MarketplaceHelper
 	}
 	
 	/**
-	 * Get a list of extension plans
+	 * Get a list of tmpl plans
 	 * 
 	 * @return  array  An array of stdClass objects.
 	 * 
@@ -99,7 +99,7 @@ class MarketplaceHelper
 	public static function getExtensionPlans()
 	{
 		$input = JFactory::getApplication()->input;
-		$repository_id = $input->getInt('filter_store_repository_id');
+		$repository_id = $input->getInt('filter_marketplace_repository_id');
 		$collection = $input->getString('filter_collection','');
 		$type = $input->getString('filter_type','');
 		$category = $input->getString('filter_category','');
@@ -111,7 +111,7 @@ class MarketplaceHelper
 		$query->from('#__marketplace_extensions AS e');
 		
 		if ($repository_id>0) {
-			$query->where('e.store_repository_id='.$db->quote($repository_id));
+			$query->where('e.marketplace_repository_id='.$db->quote($repository_id));
 		}
 		if (!empty($collection)) {
 			$query->where('e.collection='.$db->quote($collection));
@@ -146,7 +146,7 @@ class MarketplaceHelper
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		
-		$query->select('COUNT(s.store_repository_id)');
+		$query->select('COUNT(s.marketplace_repository_id)');
 		$query->from('#__marketplace_repositories AS s');
 		$query->where('s.published>=1');
 		$db->setQuery($query);
@@ -172,9 +172,9 @@ class MarketplaceHelper
 		$db = JFactory::getDBO();
 		
 		$query = $db->getQuery(true);
-		$query->select('s.name, s.store_repository_id');
+		$query->select('s.name, s.marketplace_repository_id');
 		$query->from('#__marketplace_repositories AS s');
-		$query->join('LEFT','#__marketplace_extensions AS e ON (e.store_repository_id = s.store_repository_id)');
+		$query->join('LEFT','#__marketplace_extensions AS e ON (e.marketplace_repository_id = s.marketplace_repository_id)');
 		$query->where('s.published>='.$db->quote($state));
 		if (!empty($collection)) {
 			$query->where('e.collection='.$db->quote($collection));
@@ -188,7 +188,7 @@ class MarketplaceHelper
 		if (!empty($author)) {
 			$query->where('e.author='.$db->quote($author));
 		}
-		$query->group('e.store_repository_id');
+		$query->group('e.marketplace_repository_id');
 		$query->order('s.name ASC');
 		$db->setQuery($query);
 		$repositories = $db->loadObjectList();
@@ -196,7 +196,7 @@ class MarketplaceHelper
 		$options = array();
 		foreach ($repositories as $repository)
 		{
-			$options[] = JHtml::_('select.option', $repository->store_repository_id, $repository->name);
+			$options[] = JHtml::_('select.option', $repository->marketplace_repository_id, $repository->name);
 		}
 
 		return $options;
@@ -212,7 +212,7 @@ class MarketplaceHelper
 	public static function getExtensionTypes()
 	{
 		$input = JFactory::getApplication()->input;
-		$repository_id = $input->getInt('filter_store_repository_id');
+		$repository_id = $input->getInt('filter_marketplace_repository_id');
 		$collection = $input->getString('filter_collection','');
 		$category = $input->getString('filter_category','');
 		$author = $input->getString('filter_author','');
@@ -222,7 +222,7 @@ class MarketplaceHelper
 		$query->select('DISTINCT e.type');
 		$query->from('#__marketplace_extensions AS e');
 		if ($repository_id>0) {
-			$query->where('e.store_repository_id='.$db->quote($repository_id));
+			$query->where('e.marketplace_repository_id='.$db->quote($repository_id));
 		}
 		if (!empty($collection)) {
 			$query->where('e.collection='.$db->quote($collection));
@@ -246,7 +246,7 @@ class MarketplaceHelper
 	}
 
 	/**
-	 * Get a list of extension authors
+	 * Get a list of tmpl authors
 	 * 
 	 * @return  array  An array of stdClass objects.
 	 * 
@@ -255,18 +255,18 @@ class MarketplaceHelper
 	public static function getExtensionAuthors()
 	{
 		$input = JFactory::getApplication()->input;
-		$repository_id = $input->getInt('filter_store_repository_id');
+		$repository_id = $input->getInt('filter_marketplace_repository_id');
 		$collection = $input->getString('filter_collection','');
 		$type = $input->getString('filter_type','');
 		$category = $input->getString('filter_category','');
 		
 		$db 	= JFactory::getDbo();
 		$query = $db->getQuery(true);
-		$query->select('s.name, s.store_repository_id');
+		$query->select('s.name, s.marketplace_repository_id');
 		$query->from('#__marketplace_repositories AS s');
-		$query->join('LEFT','#__marketplace_extensions AS e ON (e.store_repository_id = s.store_repository_id)');
+		$query->join('LEFT','#__marketplace_extensions AS e ON (e.marketplace_repository_id = s.marketplace_repository_id)');
 		if ($repository_id>0) {
-			$query->where('e.store_repository_id='.$db->quote($collection));
+			$query->where('e.marketplace_repository_id='.$db->quote($collection));
 		}
 		if (!empty($collection)) {
 			$query->where('e.collection='.$db->quote($collection));
@@ -274,7 +274,7 @@ class MarketplaceHelper
 		if (!empty($type)) {
 			$query->where('e.type='.$db->quote($type));
 		}
-		$query->group('e.store_repository_id');
+		$query->group('e.marketplace_repository_id');
 		$query->order('s.name ASC');
 		$db->setQuery($query);
 		$repositories = $db->loadObjectList();
@@ -288,7 +288,7 @@ class MarketplaceHelper
 			$query->select('DISTINCT e.author');
 			$query->from('#__marketplace_extensions AS e');
 			if ($repository_id>0) {
-				$query->where('e.store_repository_id='.$db->quote($repository_id));
+				$query->where('e.marketplace_repository_id='.$db->quote($repository_id));
 			}
 			if (!empty($collection)) {
 				$query->where('e.collection='.$db->quote($collection));
@@ -299,7 +299,7 @@ class MarketplaceHelper
 			if (!empty($category)) {
 				$query->where('e.category='.$db->quote($category));
 			}
-			$query->where('e.store_repository_id='.$db->quote($repository->store_repository_id));
+			$query->where('e.marketplace_repository_id='.$db->quote($repository->marketplace_repository_id));
 			$query->order('e.author');
 			$db->setQuery($query);
 			$extensions = $db->loadObjectList();
@@ -314,7 +314,7 @@ class MarketplaceHelper
 	}
 
 	/**
-	 * Get a list of extension categories
+	 * Get a list of tmpl categories
 	 * 
 	 * @return  array  An array of stdClass objects.
 	 * 
@@ -323,7 +323,7 @@ class MarketplaceHelper
 	public static function getExtensionCategories()
 	{	
 		$input = JFactory::getApplication()->input;
-		$repository_id = $input->getInt('filter_store_repository_id');
+		$repository_id = $input->getInt('filter_marketplace_repository_id');
 		$collection = $input->getString('filter_collection','');
 		$type = $input->getString('filter_type','');
 		$author = $input->getString('filter_author','');
@@ -333,7 +333,7 @@ class MarketplaceHelper
 		$query->select('DISTINCT e.category');
 		$query->from('#__marketplace_extensions AS e');
 		if ($repository_id>0) {
-			$query->where('e.store_repository_id='.$db->quote($repository_id));
+			$query->where('e.marketplace_repository_id='.$db->quote($repository_id));
 		}
 		if (!empty($collection)) {
 			$query->where('e.collection='.$db->quote($collection));

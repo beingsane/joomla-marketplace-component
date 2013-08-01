@@ -1,2 +1,2 @@
-DROP TABLE `#__marketplace_extensions`;
-DROP TABLE `#__marketplace_repositories`;
+DROP TABLE IF EXISTS `#__marketplace_extensions`;
+DROP TABLE IF EXISTS `#__marketplace_repositories`;

@@ -60,7 +60,7 @@ class JMarketplace extends JAdapter
 	}
 
 	/**
-	 * Finds an update for an extension
+	 * Finds an update for an tmpl
 	 *
 	 * @param   integer  $cacheTimeout  How many seconds to cache update information; if zero, force reload the update information
 	 *
@@ -75,7 +75,7 @@ class JMarketplace extends JAdapter
 		$retval = false;
 
 		$query = $db->getQuery(true);
-		$query->select('a.store_repository_id, a.type, a.location, a.last_check_timestamp');
+		$query->select('a.marketplace_repository_id, a.type, a.location, a.last_check_timestamp');
 		$query->from('#__marketplace_repositories AS a');
 		$query->where('a.published>=1');
 		
@@ -140,10 +140,10 @@ class JMarketplace extends JAdapter
 						);
 						if (!$uid)
 						{
-							// Set the extension id
+							// Set the tmpl id
 							if ($eid)
 							{
-								// We have an installed extension, check the update is actually newer
+								// We have an installed tmpl, check the update is actually newer
 								$extension->load($eid);
 								$data = json_decode($extension->manifest_cache, true);
 								if (version_compare($current_update->version, $data['version'], '>') == 1)
@@ -154,7 +154,7 @@ class JMarketplace extends JAdapter
 							}
 							else
 							{
-								// A potentially new extension to be installed
+								// A potentially new tmpl to be installed
 								$current_update->store();
 							}
 						}
@@ -181,7 +181,7 @@ class JMarketplace extends JAdapter
 			$query = $db->getQuery(true)
 				->update($db->quoteName('#__marketplace_repositories'))
 				->set($db->quoteName('last_check_timestamp') . ' = ' . $db->quote($now))
-				->where($db->quoteName('store_repository_id') . ' = ' . $db->quote($result['store_repository_id']));
+				->where($db->quoteName('marketplace_repository_id') . ' = ' . $db->quote($result['marketplace_repository_id']));
 			$db->setQuery($query);
 			$db->execute();
 		}
@@ -189,9 +189,9 @@ class JMarketplace extends JAdapter
 	}
 
 	/**
-	 * Finds an update for an extension
+	 * Finds an update for an tmpl
 	 *
-	 * @param   integer  $id  Id of the extension
+	 * @param   integer  $id  Id of the tmpl
 	 *
 	 * @return  mixed
 	 *
@@ -202,7 +202,7 @@ class JMarketplace extends JAdapter
 		$updaterow = JTable::getInstance('marketplaceextensions');
 		$updaterow->load($id);
 		$update = new JUpdate;
-		if ($update->loadFromXML($updaterow->detailsurl))
+		if ($update->loadFromXML($updaterow->buttonurl))
 		{
 			return $update->install();
 		}

@@ -21,7 +21,7 @@ class JTableMarketplacerepositories extends JTable {
      * @param JDatabase A database connector object
      */
     public function __construct(&$db) {
-        parent::__construct('#__marketplace_repositories', 'store_repository_id', $db);
+        parent::__construct('#__marketplace_repositories', 'marketplace_repository_id', $db);
     }
 
     public function check()

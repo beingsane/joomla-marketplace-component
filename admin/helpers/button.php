@@ -44,7 +44,7 @@ class MarketplaceHelperButton
 	}
 	
 	/**
-	 * Build extension button
+	 * Build tmpl button
 	 * 
 	 * @param	Object $extension
 	 * 
@@ -53,24 +53,23 @@ class MarketplaceHelperButton
 	static public function download($extension)
 	{	
 		$button = $extension->plan;
-		$onclick = '';
+		$href = 'javascript:void(0);';
+        $target= '_self';
 		if ($extension->extension_id == 0) {
 			switch (strtolower($extension->plan)) {
 				case 'register':
 					$btn_class = ' btn-warning';
-					$uri = JFactory::getUri($extension->url);
-					$uri->setVar('return',base64_encode(JFactory::getUri()->base()));
-					$onclick = ' onclick="window.open(\''.$uri.'\')"';
+                    $href = $extension->buttonurl;
+                    $target= '_blank';
 					break;
 				case 'buy':
 					$btn_class = ' btn-success';
-					$uri = JFactory::getUri($extension->url);
-					$uri->setVar('return',base64_encode(JFactory::getUri()->base()));
-					$onclick = ' onclick="window.open(\''.$uri.'\')"';
+                    $href = $extension->buttonurl;
+                    $target= '_blank';
 					break;
 				case 'install':
 					$btn_class = ' btn-primary';
-					$onclick = ' onclick="document.id(\'eid\').value=\''.$extension->store_extension_id.'\';Joomla.submitbutton(\'extension.install\');"';
+					$href = 'document.id(\'eid\').value=\''.$extension->marketplace_extension_id.'\';Joomla.submitbutton(\'tmpl.install\');';
 					break;
 				default:
 					$btn_class = '';
@@ -81,7 +80,7 @@ class MarketplaceHelperButton
 			$button='installed';
 		}
 		
-		$html = '<button'.$onclick.' type="button" class="btn'.$btn_class.'">'.JText::_('COM_MARKETPLACE_MARKETPLACE_BUTTON_'.$button).'</button>';
+		$html = '<a href='.$href.'" target="'.$target.'" class="btn'.$btn_class.'">'.JText::_('COM_MARKETPLACE_MARKETPLACE_BUTTON_'.$button).'</a>';
 		
 		return $html;
 	}

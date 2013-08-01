@@ -105,7 +105,7 @@ class JMarketplaceCollection extends JMarketplaceAdapter
 			case 'CATEGORY':
 				if (isset($attrs['REF']))
 				{
-					$this->update_sites[] = array('type' => 'collection', 'location' => $attrs['REF'], 'store_repository_id' => $this->storeSiteId);
+					$this->update_sites[] = array('type' => 'collection', 'location' => $attrs['REF'], 'marketplace_repository_id' => $this->marketplaceRepositoryId);
 				}
 				else
 				{
@@ -115,7 +115,7 @@ class JMarketplaceCollection extends JMarketplaceAdapter
 				break;
 			case 'EXTENSION':
 				$update = JTable::getInstance('marketplaceextensions');
-				$update->set('store_repository_id', $this->storeSiteId);
+				$update->set('marketplace_repository_id', $this->marketplaceRepositoryId);
 				foreach ($this->updatecols as $col)
 				{
 					// Reset the values if it doesn't exist
@@ -147,11 +147,11 @@ class JMarketplaceCollection extends JMarketplaceAdapter
 				$product = strtolower(JFilterInput::getInstance()->clean($ver->PRODUCT, 'cmd'));
 
 				/*
-				 * Set defaults, the extension file should clarify in case but it may be only available in one version
+				 * Set defaults, the tmpl file should clarify in case but it may be only available in one version
 				 * This allows an update site to specify a targetplatform
-				 * targetplatformversion can be a regexp, so 1.[56] would be valid for an extension that supports 1.5 and 1.6
-				 * Note: Whilst the version is a regexp here, the targetplatform is not (new extension per platform)
-				 * Additionally, the version is a regexp here and it may also be in an extension file if the extension is
+				 * targetplatformversion can be a regexp, so 1.[56] would be valid for an tmpl that supports 1.5 and 1.6
+				 * Note: Whilst the version is a regexp here, the targetplatform is not (new tmpl per platform)
+				 * Additionally, the version is a regexp here and it may also be in an tmpl file if the tmpl is
 				 * compatible against multiple versions of the same platform (e.g. a library)
 				 */
 				if (!isset($values['targetplatform']))
@@ -164,7 +164,7 @@ class JMarketplaceCollection extends JMarketplaceAdapter
 					$values['targetplatformversion'] = $ver->RELEASE;
 				}
 				// Set this to ourself as a default
-				// validate that we can install the extension
+				// validate that we can install the tmpl
 				if ($product == $values['targetplatform'] && preg_match('/' . $values['targetplatformversion'] . '/', $ver->RELEASE))
 				{
 					$update->bind($values);
@@ -214,7 +214,7 @@ class JMarketplaceCollection extends JMarketplaceAdapter
 	public function findUpdate($options)
 	{
 		$url = $options['location'];
-		$this->storeSiteId = $options['store_repository_id'];
+		$this->storeSiteId = $options['marketplace_repository_id'];
 
 		$this->base = new stdClass;
 		$this->update_sites = array();
@@ -228,7 +228,7 @@ class JMarketplaceCollection extends JMarketplaceAdapter
 			$query = $db->getQuery(true)
 				->update('#__marketplace_repositories')
 				->set('enabled = 0')
-				->where('store_repository_id = ' . $this->storeSiteId);
+				->where('marketplace_repository_id = ' . $this->marketplaceRepositoryId);
 			$db->setQuery($query);
 			$db->execute();
 

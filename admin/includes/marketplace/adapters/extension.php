@@ -44,7 +44,7 @@ class JMarketplaceExtension extends JMarketplaceAdapter
 		{
 			case 'UPDATE':
 				$this->current_update = JTable::getInstance('marketplaceextensions');
-				$this->current_update->store_repository_id = $this->storeSiteId;
+				$this->current_update->marketplace_repository_id = $this->marketplaceRepositoryId;
 				$this->current_update->detailsurl = $this->_url;
 				$this->current_update->folder = "";
 				$this->current_update->client_id = 1;
@@ -157,7 +157,7 @@ class JMarketplaceExtension extends JMarketplaceAdapter
 	{
 		$url = $options['location'];
 		$this->_url = &$url;
-		$this->storeSiteId = $options['store_repository_id'];
+		$this->storeSiteId = $options['marketplace_repository_id'];
 
 		$db = $this->parent->getDBO();
 
@@ -168,7 +168,7 @@ class JMarketplaceExtension extends JMarketplaceAdapter
 			$query = $db->getQuery(true)
 				->update('#__marketplace_repositories')
 				->set('published = 0')
-				->where('store_repository_id = ' . $this->storeSiteId);
+				->where('marketplace_repository_id = ' . $this->marketplaceRepositoryId);
 			$db->setQuery($query);
 			$db->execute();
 

@@ -21,7 +21,7 @@ Joomla.submitbutton = function(task)
 {
 	if (task == 'repository.save')
 	{
-		repository_url = jQuery('#store_repository_url').val();
+		repository_url = jQuery('#marketplace_repository_url').val();
 		if (repository_url.match(/^(http|https)\:\/\/[a-z_\-.\/?=&0-9]*/) && repository_url != 'http://' && repository_url != 'https://') {
 			Joomla.submitform(task, document.getElementById('adminForm'));
 		} else {
@@ -80,7 +80,7 @@ Joomla.submitbutton = function(task)
 							<?php if ($repository->published == 2 && !$this->user->authorise('repositories.manage.state','com_marketplace')): ?>
 								<input type="checkbox" disabled="disabled" />
 							<?php else: ?>
-								<?php echo JHtml::_('grid.id', $i, $repository->store_repository_id); ?>
+								<?php echo JHtml::_('grid.id', $i, $repository->marketplace_repository_id); ?>
 							<?php endif; ?>
 						</td>
 						<td>
@@ -97,7 +97,7 @@ Joomla.submitbutton = function(task)
 							<?php endif; ?>
 						</td>
 						<td class="small hidden-phone">
-							<?php echo $repository->store_repository_id; ?>
+							<?php echo $repository->marketplace_repository_id; ?>
 						</td>
 					</tr>
 					<?php endforeach; ?>
@@ -109,7 +109,7 @@ Joomla.submitbutton = function(task)
 			    <p><?php echo JText::_('COM_MARKETPLACE_REPOSITORIES_INTRODUCTION'); ?></p>
 			    <p>
 			        <div class="input-append">
-    <input name="jform[location]" id="store_repository_url" value="http://" type="text">
+    <input name="jform[location]" id="marketplace_repository_url" value="http://" type="text">
     <button class="btn btn-success" onclick="Joomla.submitbutton('repository.save')" type="button"><?php echo JText::_('COM_MARKETPLACE_REPOSITORIES_BUTTON_ADD'); ?></button>
     </div>
 			    </p>

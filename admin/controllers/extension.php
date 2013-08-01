@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Extensions Store Controller
+ * Extension Store Controller
  *
  * @package     Joomla.Administrator
  * @subpackage  com_marketplace
@@ -30,7 +30,7 @@ class MarketplaceControllerExtension extends JControllerLegacy
 		// Check for request forgeries
 		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
 		
-		$model = $this->getModel('extension');
+		$model = $this->getModel('tmpl');
 		$extension_id = $this->input->getInt('eid');
 		$url = $model->getLink($extension_id);
 		
