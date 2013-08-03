@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<access component="com_marketplace">
+	<section name="component">
+		<action name="core.admin" title="JACTION_ADMIN" description="JACTION_ADMIN_COMPONENT_DESC" />
+		<action name="core.manage" title="JACTION_MANAGE" description="JACTION_MANAGE_COMPONENT_DESC" />
+		<action name="core.create" title="JACTION_CREATE" description="JACTION_CREATE_COMPONENT_DESC" />
+		<action name="core.edit" title="JACTION_EDIT" description="JACTION_EDIT_COMPONENT_DESC" />
+		<action name="core.delete" title="JACTION_DELETE" description="JACTION_DELETE_COMPONENT_DESC" />
+		<action name="marketplace.findextensions" title="COM_MARKETPLACE_ACTION_MARKETPLACE_FIND_EXTENSIONS_MANAGE" description="COM_MARKETPLACE_ACTION_MARKETPLACE_FIND_EXTENSIONS_MANAGE_DESC" />
+		<action name="repositories.manage" title="COM_MARKETPLACE_ACTION_REPOSITORIES_MANAGE" description="COM_MARKETPLACE_ACTION_REPOSITORIES_MANAGE_DESC" />
+		<action name="repositories.manage.state" title="COM_MARKETPLACE_ACTION_REPOSITORIES_MANAGE_STATES" description="COM_MARKETPLACE_ACTION_REPOSITORIES_MANAGE_STATES_DESC" />
+	</section>
+</access>

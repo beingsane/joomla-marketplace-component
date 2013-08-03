@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="package" version="3.1" method="upgrade">
+    <name>Marketplace Package</name>
+    <packagename>marketplace</packagename>
+    <version>3.0</version>
+    <description>Marketplace for extensions</description>
+    <creationDate>Jun 2013</creationDate>
+    <copyright>Copyright (C) 2005 - 2013 Open Source Matters. All rights reserved.</copyright>
+    <license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+    <author>JConnect</author>
+    <authorEmail></authorEmail>
+    <authorUrl>www.jconnect.me</authorUrl>
+    <packager>JConnect</packager>
+    <packagerurl>http://www.jconnect.me/</packagerurl>
+    <update>http://update.joomla.org/packages/joomla</update>
+    <files folder="packages">
+        <file type="component" id="com_marketplace">com_marketplace</file>
+        <file type="plugin" id="marketplace" group="system">plg_system_marketplace</file>
+    </files>
+</extension>
