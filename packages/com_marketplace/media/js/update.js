@@ -1,6 +1,4 @@
 function updateRepository(url, data) {
-    console.log(url);
-    console.log(data);
     jQuery.ajax({
         cache: false,
         dataType: 'jsonp',
