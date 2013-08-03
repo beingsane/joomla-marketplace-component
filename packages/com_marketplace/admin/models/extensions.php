@@ -74,6 +74,10 @@ class MarketplaceModelExtensions extends JModelList
 		// Join installed extensions
 		$query->select('e.extension_id');
 		$query->join('LEFT', $db->quoteName('#__extensions').' AS e ON e.element = a.identifier');
+
+        // Join updates extensions
+        $query->select('u.update_id');
+        $query->join('LEFT', $db->quoteName('#__updates').' AS u ON (u.element = a.identifier AND e.extension_id = u.extension_id)');
 		
 		$query->where('a.name!=""');
 		

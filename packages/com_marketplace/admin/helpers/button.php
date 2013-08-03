@@ -68,7 +68,7 @@ class MarketplaceHelperButton
                     $target= '_blank';
 					break;
 				case 'install':
-					$btn_class = ' btn-primary';
+					$btn_class = ' btn-info';
 					$href = 'index.php?option=com_marketplace&task=extension.install&eid='.$extension->marketplace_extension_id.'&'.JSession::getFormToken().'=1';
 					break;
 				default:
@@ -76,8 +76,14 @@ class MarketplaceHelperButton
 					break;
 			}
 		} else {
-			$btn_class = ' disabled';
-			$button='installed';
+            if ($extension->update_id) {
+                $btn_class = ' btn-primary';
+                $button = 'update';
+                $href = "javascript:document.id('option').value='com_installer';document.id('cid').value='{$extension->update_id}';Joomla.submitbutton('update.update');";
+            } else {
+                $btn_class = ' disabled';
+                $button='installed';
+            }
 		}
 		
 		$html = '<a href="'.$href.'" target="'.$target.'" class="btn'.$btn_class.'">'.JText::_('COM_MARKETPLACE_MARKETPLACE_BUTTON_'.$button).'</a>';

@@ -51,7 +51,8 @@ $listDirn  = $this->escape($this->state->get('list.direction'));
 		<?php endif; ?>
 	<?php endif; ?>
 		<input type="hidden" name="display" id="display" value="<?php echo $this->items[0]->display; ?>">
-		<input type="hidden" name="eid" id="eid" value="0" />
+        <input type="hidden" name="option" id="option" value="com_marketplace" />
+		<input type="hidden" name="cid[]" id="cid" value="0" />
 		<input type="hidden" name="filter_section" id="filter_section" value="<?php echo $this->state->get('filter.section'); ?>" />
 		<input type="hidden" name="task" value="" />
 		<input type="hidden" name="boxchecked" value="0" />
