@@ -32,6 +32,6 @@ CREATE TABLE `#__marketplace_repositories` (
   `name` varchar(100) DEFAULT '',
   `location` text NOT NULL,
   `published` int(11) DEFAULT '0',
-  `last_check_timestamp` bigint(20) DEFAULT '0',
+  `last_check_timestamp` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`marketplace_repository_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='marketplace Repositories';

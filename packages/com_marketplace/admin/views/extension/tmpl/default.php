@@ -30,7 +30,7 @@ defined('_JEXEC') or die;
             <?php endif; ?>
 
 
-            <a href="<?php echo $this->item->item_url; ?>" target="_blank" class="btn"><?php echo JText::_('COM_MARKETPLACE_TEXT_INFO_URL'); ?></a>
+            <a href="<?php echo $this->item->details_url; ?>" target="_blank" class="btn"><?php echo JText::_('COM_MARKETPLACE_TEXT_INFO_URL'); ?></a>
             <a href="<?php echo $this->item->author_url; ?>" target="_blank" class="btn"><?php echo JText::_('COM_MARKETPLACE_TEXT_AUTHOR_URL'); ?></a>
             <?php echo MarketplaceHelperButton::download($this->item); ?>
 
