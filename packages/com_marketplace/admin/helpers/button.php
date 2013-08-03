@@ -69,7 +69,7 @@ class MarketplaceHelperButton
 					break;
 				case 'install':
 					$btn_class = ' btn-primary';
-					$href = 'javascript:document.id(\'eid\').value=\''.$extension->marketplace_extension_id.'\';Joomla.submitbutton(\'extension.install\');';
+					$href = 'index.php?option=com_marketplace&task=extension.install&eid='.$extension->marketplace_extension_id.'&'.JSession::getFormToken().'=1';
 					break;
 				default:
 					$btn_class = '';

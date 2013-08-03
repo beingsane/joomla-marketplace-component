@@ -22,7 +22,7 @@ defined('_JEXEC') or die;
 			<br />
 			<i class="icon-user"></i><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_EXTENSIONS_INFO', $extension->author); ?>
 			<br />
-			<small><?php echo MarketplaceHelperRating::rating($extension->rating); ?><div class="visible-phone"><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_REVIEWS_PHONE',$extension->reviews); ?></div><div class="visible-tablet visible-desktop"><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_REVIEWS_TABLET',$extension->reviews); ?></div></small>
+			<small><?php echo MarketplaceHelperRating::rating($extension->rating); ?> <i class='icon-comment'></i> <?php echo $extension->reviews;?></small>
 			<br />
 			<?php echo MarketplaceHelperButton::download($extension); ?>
 		</div>

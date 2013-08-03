@@ -28,7 +28,7 @@ class MarketplaceControllerExtension extends JControllerLegacy
 	public function install()
 	{
 		// Check for request forgeries
-		JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+		JSession::checkToken('get') or jexit(JText::_('JINVALID_TOKEN'));
 		
 		$model = $this->getModel('extension');
 		$extension_id = $this->input->getInt('eid');

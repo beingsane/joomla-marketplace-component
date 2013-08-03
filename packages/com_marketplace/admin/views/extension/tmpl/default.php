@@ -11,22 +11,35 @@ defined('_JEXEC') or die;
 ?>
 <div class="row-fluid">
     <div class="span12 well well-small">
+        <div class="page-header">
+            <h1><?php echo $this->item->name; ?></h1>
+            <small>
+                   <?php echo JText::sprintf('COM_MARKETPLACE_TEXT_BY_AUTHOR',$this->item->author); ?>
+                   <br />
+                   <?php echo JText::sprintf('COM_MARKETPLACE_TEXT_VERSION',$this->item->version); ?>
+            </small>
+        </div>
+
 
             <img class="img-polaroid" src="<?php echo $this->item->icon; ?>" />
-
-            <h2><?php echo $this->item->name; ?></h2>
             <br />
-            <i class="icon-user"></i><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_EXTENSIONS_INFO', $this->item->author); ?>
-            <br />
-            <small><?php echo MarketplaceHelperRating::rating($this->item->rating); ?><div class="visible-phone"><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_REVIEWS_PHONE',$this->item->reviews); ?></div><div class="visible-tablet visible-desktop"><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_REVIEWS_TABLET',$this->item->reviews); ?></div></small>
+            <small><?php echo MarketplaceHelperRating::rating($this->item->rating); ?><i class='icon-comment'></i> <?php echo $this->item->reviews;?></small>
             <br />
             <?php echo nl2br($this->item->description); ?>
             <br />
 
             <?php if (count($this->item->images) > 0): ?>
-            <?php foreach ($this->item->images as $image): ?>
-                <img class="img-polaroid" src="<?php echo $image; ?>" />
-            <?php endforeach; ?>
+                <div class="row-fluid">
+                    <ul class="thumbnails">
+                        <?php foreach ($this->item->images as $image): ?>
+                            <li class="span<?php echo floor(12 / count($this->item->images)); ?>">
+                                <a class="thubmail">
+                                    <img class="img-polaroid" src="<?php echo $image; ?>" />
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
             <?php endif; ?>
 
 
