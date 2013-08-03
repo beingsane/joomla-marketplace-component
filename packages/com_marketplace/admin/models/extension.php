@@ -33,14 +33,21 @@ class MarketplaceModelExtension extends JModelLegacy
 	{
 		$extension = $this->getTable('marketplaceextensions','jtable');
 		$extension->load($extension_id);
+
+        // ping item url to check content type before try to update using update manifest
+        $http = new JHttp;
+        $response = $http->get($extension->item_url);
+        $is_xml = (strpos($response->headers['Content-Type'],'xml') === false) ? false : true ;
 		
-		if ($extension->marketplace_extension_id == 0 || $extension->plan != 'install' || empty($extension->item_url)) {
+		if ($extension->marketplace_extension_id == 0 || $extension->plan != 'install' || empty($extension->item_url) || (substr($extension->item_url,-5) == '.html') || !$is_xml) {
+            JFactory::getApplication()->enqueueMessage(JText::_('COM_MARKETPLACE_PROVIDE_UPDATE_MANIFEST_URL'),'warning');
 			return false;
 		}
-		
-		$update = new JUpdate;
-		$update->loadFromXML($extension->item_url);
-		$package_url = $update->get('downloadurl', false);
+
+        $update = new JUpdate;
+        $update->loadFromXML($extension->item_url);
+        $package_url = $update->get('downloadurl', false);
+
 		if (!$package_url) {
 			return false;
 		} else {
