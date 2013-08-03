@@ -36,9 +36,9 @@ class PlgSystemMarketplace extends JPlugin
             $install_url = base64_decode($install_url);
         }
 
-        if ($app->isAdmin() && $option == 'com_installer' && !empty($install_url) && (empty($view) || $view == 'installer'))
+        if ($app->isAdmin() && $option == 'com_installer' && !empty($install_url) && (empty($view) || $view == 'install'))
         {
-            $doc->addScriptDeclaration("jQuery(document).ready(function() {jQuery('a[href=#url]').tab('show'); jQuery('#install_url').val('$install_url');}_;");
+            $doc->addScriptDeclaration("jQuery(document).ready(function() {jQuery('a[href=#url]').tab('show'); jQuery('#install_url').val('$install_url');});");
         }
     }
 }
