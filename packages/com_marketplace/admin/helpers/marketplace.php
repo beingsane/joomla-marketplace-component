@@ -61,7 +61,7 @@ class MarketplaceHelper
 	{
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_marketplace_repository_id');
-		$type = $input->getString('filter_type','');
+		$type = $input->getString('filter_tag','');
 		$category = $input->getString('filter_category','');
 		$author = $input->getString('filter_author','');
 		
@@ -73,7 +73,7 @@ class MarketplaceHelper
 			$query->where('e.marketplace_repository_id='.$db->quote($repository_id));
 		}
 		if (!empty($type)) {
-            $query->where('e.types LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
+            $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		if (!empty($category)) {
             $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
@@ -103,7 +103,7 @@ class MarketplaceHelper
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_marketplace_repository_id');
         $section = $input->getString('filter_section','');
-		$type = $input->getString('filter_type','');
+		$type = $input->getString('filter_tag','');
 		$category = $input->getString('filter_category','');
 		$author = $input->getString('filter_author','');
 		
@@ -119,7 +119,7 @@ class MarketplaceHelper
 			$query->where('e.section='.$db->quote($section));
 		}
 		if (!empty($type)) {
-            $query->where('e.types LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
+            $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		if (!empty($category)) {
             $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
@@ -167,7 +167,7 @@ class MarketplaceHelper
 	{
 		$input = JFactory::getApplication()->input;
 		$section = $input->getString('filter_section','');
-		$type = $input->getString('filter_type','');
+		$type = $input->getString('filter_tag','');
 		$category = $input->getString('filter_category','');
 		$author = $input->getString('filter_author','');
 		
@@ -182,7 +182,7 @@ class MarketplaceHelper
 			$query->where('e.section='.$db->quote($section));
 		}
 		if (!empty($type)) {
-            $query->where('e.types LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
+            $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		if (!empty($category)) {
             $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
@@ -221,7 +221,7 @@ class MarketplaceHelper
 		
 		$db 	= JFactory::getDbo();
 		$query 	= $db->getQuery(true);
-		$query->select('DISTINCT e.types');
+		$query->select('DISTINCT e.tags');
 		$query->from('#__marketplace_extensions AS e');
 		if ($repository_id>0) {
 			$query->where('e.marketplace_repository_id='.$db->quote($repository_id));
@@ -235,14 +235,14 @@ class MarketplaceHelper
 		if (!empty($author)) {
 			$query->where('e.author='.$db->quote($author));
 		}
-		$query->order('e.types');
+		$query->order('e.tags');
 		$db->setQuery($query);
 		$extensions = $db->loadObjectList();
 		
 		$options = array();
         $types = array();
 		foreach ($extensions as $extension) {
-            $types = array_merge($types, json_decode($extension->types, true));
+            $types = array_merge($types, json_decode($extension->tags, true));
 		}
         $types = array_unique($types);
         $types = array_filter($types);
@@ -265,7 +265,7 @@ class MarketplaceHelper
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_marketplace_repository_id');
 		$section = $input->getString('filter_section','');
-		$type = $input->getString('filter_type','');
+		$type = $input->getString('filter_tag','');
 		$category = $input->getString('filter_category','');
 		
 		$db 	= JFactory::getDbo();
@@ -280,7 +280,7 @@ class MarketplaceHelper
 			$query->where('e.section='.$db->quote($section));
 		}
 		if (!empty($type)) {
-            $query->where('e.types LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
+            $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		$query->group('e.marketplace_repository_id');
 		$query->order('s.name ASC');
@@ -302,7 +302,7 @@ class MarketplaceHelper
 				$query->where('e.collection='.$db->quote($collection));
 			}
 			if (!empty($type)) {
-                $query->where('e.types LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
+                $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 			}
 			if (!empty($category)) {
                 $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
@@ -333,7 +333,7 @@ class MarketplaceHelper
 		$input = JFactory::getApplication()->input;
 		$repository_id = $input->getInt('filter_marketplace_repository_id');
 		$section = $input->getString('filter_section','');
-		$type = $input->getString('filter_type','');
+		$type = $input->getString('filter_tag','');
 		$author = $input->getString('filter_author','');
 		
 		$db 	= JFactory::getDbo();
@@ -347,7 +347,7 @@ class MarketplaceHelper
 			$query->where('e.section='.$db->quote($section));
 		}
 		if (!empty($type)) {
-            $query->where('e.types LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
+            $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		if (!empty($author)) {
 			$query->where('e.author='.$db->quote($author));

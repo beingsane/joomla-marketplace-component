@@ -63,7 +63,7 @@ class MarketplaceModelExtensions extends JModelList
 		$query  = $db->getQuery(true);
 
 		// Select the required fields from the updates table
-		$query->select('a.marketplace_extension_id, a.icon, a.name, a.types, a.plan,a.pathway, a.author, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
+		$query->select('a.marketplace_extension_id, a.icon, a.name, a.tags, a.plan,a.pathway, a.author, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
 
 		$query->from($db->quoteName('#__marketplace_extensions').' AS a');
 		
@@ -99,9 +99,9 @@ class MarketplaceModelExtensions extends JModelList
 			$query->where('a.section='.$db->quote($section));
 		}
 		
-		$type = $this->getState('filter.type');
+		$type = $this->getState('filter.tags');
 		if (!empty($type)) {
-            $query->where('e.types LIKE '. $this->_db->quote('%' . $this->_db->escape($type, true) . '%'));
+            $query->where('e.tags LIKE '. $this->_db->quote('%' . $this->_db->escape($type, true) . '%'));
 		}
 		
 		$category = $this->getState('filter.category');
@@ -140,7 +140,7 @@ class MarketplaceModelExtensions extends JModelList
 		$id	.= ':' . $this->getState('filter.search');
 		$id	.= ':' . $this->getState('filter.marketplace_repository_id');
 		$id	.= ':' . $this->getState('filter.section');
-		$id	.= ':' . $this->getState('filter.type');
+		$id	.= ':' . $this->getState('filter.tags');
 		$id	.= ':' . $this->getState('filter.category');
 		$id	.= ':' . $this->getState('filter.author');
 		$id	.= ':' . $this->getState('filter.plan');
@@ -172,8 +172,8 @@ class MarketplaceModelExtensions extends JModelList
 		$section = $app->getUserStateFromRequest($this->context.'.filter.section', 'filter_section');
 		$this->setState('filter.section', $section);
 		
-		$type = $app->getUserStateFromRequest($this->context.'.filter.type', 'filter_type');
-		$this->setState('filter.type', $type);
+		$type = $app->getUserStateFromRequest($this->context.'.filter.tags', 'filter_tag');
+		$this->setState('filter.tags', $type);
 
 		$category = $app->getUserStateFromRequest($this->context.'.filter.category', 'filter_category');
 		$this->setState('filter.category', $category);

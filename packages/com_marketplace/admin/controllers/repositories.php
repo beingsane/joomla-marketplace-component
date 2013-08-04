@@ -37,4 +37,36 @@ class MarketplaceControllerRepositories extends JControllerAdmin
 
 		return $model;
 	}
+
+    /**
+     * Reset last checked timestamp
+     *
+     * @since   3.1
+     */
+    public function reset()
+    {
+        // Check for request forgeries
+        JSession::checkToken() or jexit(JText::_('JINVALID_TOKEN'));
+
+        $app = JFactory::getApplication();
+        $ids  = $this->input->get('cid', array(), 'array');
+
+        if (empty($ids))
+        {
+            $app->enqueueMessage(JText::_('JERROR_NO_ITEMS_SELECTED'));
+        }
+        else
+        {
+            // Get the model.
+            $model = $this->getModel();
+
+            // Remove the items.
+            if (!$model->reset($ids))
+            {
+                $app->enqueueMessage($model->getError(),'error');
+            }
+        }
+
+        $this->setRedirect('index.php?option=com_marketplace&view=repositories');
+    }
 }

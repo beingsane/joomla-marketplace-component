@@ -74,7 +74,7 @@ class MarketplaceViewMarketplace extends JViewLegacy
 	protected function addToolbar()
 	{
 		$canDo	= MarketplaceHelper::getActions();
-		$type = $this->state->get('filter.type');
+		$type = $this->state->get('filter.tags');
 		$section = $this->state->get('filter.section');
 		$this->section = ucfirst($section);
 		
@@ -107,8 +107,8 @@ class MarketplaceViewMarketplace extends JViewLegacy
 			if ($this->state->get('filter.browse') == '') {
 				JHtmlSidebar::addFilter(
 					JText::_('COM_MARKETPLACE_VALUE_TYPE_SELECT'),
-					'filter_type',
-					JHtml::_('select.options', MarketplaceHelper::getExtensionTypes(), 'value', 'text', $this->state->get('filter.type'), true)
+					'filter_tag',
+					JHtml::_('select.options', MarketplaceHelper::getExtensionTypes(), 'value', 'text', $this->state->get('filter.tags'), true)
 				);
 			}
 			

@@ -71,18 +71,21 @@ class MarketplaceModelExtension extends JModelLegacy
             $extension_id = JFactory::getApplication()->input->getInt('id');
 
             // Select the required fields from the updates table
-            $query->select('a.marketplace_extension_id, a.name, a.icon, a.types, a.pathway, a.plan,a.author, a.description, a.images, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
+            $query->select('a.marketplace_extension_id, a.name, a.icon, a.tags, a.pathway, a.plan,a.author, a.description, a.images, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
             $query->from($db->quoteName('#__marketplace_extensions').' AS a');
             // Join installed extensions
             $query->select('e.extension_id');
             $query->join('LEFT', $db->quoteName('#__extensions').' AS e ON e.element = a.identifier');
+            // Join updates extensions
+            $query->select('u.update_id');
+            $query->join('LEFT', $db->quoteName('#__updates').' AS u ON (u.element = a.identifier AND e.extension_id = u.extension_id)');
             $query->where('a.marketplace_extension_id='.$db->quote($extension_id));
             $db->setQuery($query);
             $this->item = $db->loadObject();
 
             if (!empty($this->item)) {
                 $this->item->images = array_filter(json_decode($this->item->images, true));
-                $this->item->types = json_decode($this->item->types, true);
+                $this->item->tags = json_decode($this->item->tags, true);
             }
         }
 

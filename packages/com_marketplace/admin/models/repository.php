@@ -123,7 +123,7 @@ class MarketplaceModelRepository extends JModelAdmin
             }
             else
             {
-                $extension->load($uid);
+                $current_update->setKey($uid);
 
                 // If there is an update, check that the version is newer then replaces
                 if (version_compare($current_update->version, $marketExtensions->version, '>') == 1)
@@ -148,6 +148,29 @@ class MarketplaceModelRepository extends JModelAdmin
     }
 
     /**
+     * Reset timestamp
+     *
+     * @param   array  $cids
+     * @param   timestamp  $new_value
+     *
+     * @since   3.1
+     */
+    public function reset(array $cids = array())
+    {
+        $db = $this->_db;
+        $query = $db->getQuery(true)
+            ->update('#__marketplace_repositories')
+            ->set('last_check_timestamp = 0')
+            ->where('marketplace_repository_id IN ('.implode(',',$cids).')');
+        $db->setQuery($query);
+        $db->execute();
+
+        $return = $db->getAffectedRows();
+        JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_MARKETPLACE_REPOSITORIES_N_ITEMS_RESET',$return));
+        return $return;
+    }
+
+    /**
      * Repository error reporting
      *
      * @param   $url   The string url
@@ -159,7 +182,7 @@ class MarketplaceModelRepository extends JModelAdmin
      */
     public function error($url, $text)
     {
-        $db = $this->parent->getDBO();
+        $db = $this->_db;
         $query = $db->getQuery(true)
             ->update('#__marketplace_repositories')
             ->set('enabled = 0')

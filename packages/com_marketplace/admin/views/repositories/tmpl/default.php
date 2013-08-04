@@ -54,6 +54,9 @@ Joomla.submitbutton = function(task)
 						<th class="nowrap">
 							<?php echo JHtml::_('grid.sort', 'COM_MARKETPLACE_HEADING_NAME', 'name', $listDirn, $listOrder); ?>
 						</th>
+                        <th width="35%" class="nowrap hidden-phone">
+                            <?php echo JText::_('COM_MARKETPLACE_HEADING_LAST_UPDATED_TIME'); ?>
+                        </th>
 						<th width="35%" class="nowrap hidden-phone">
 							<?php echo JText::_('COM_MARKETPLACE_HEADING_DETAILS_URL'); ?>
 						</th>
@@ -86,6 +89,9 @@ Joomla.submitbutton = function(task)
 						<td>
 							<?php echo $repository->name; ?>
 						</td>
+                        <td>
+                            <?php echo $repository->last_check_timestamp; ?>
+                        </td>
 						<td class="small hidden-phone">
 							<?php echo $repository->location; ?>
 						</td>

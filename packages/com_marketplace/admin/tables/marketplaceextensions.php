@@ -50,6 +50,19 @@ class JTableMarketplaceextensions extends JTable {
     }
 
     /**
+     * Set primary key
+     *
+     * @param   $id
+     *
+     * @since   3.1
+     */
+    public function setKey($id)
+    {
+        $key = $this->_tbl_key;
+        $this->$key = $id;
+    }
+
+    /**
      * Overloaded bind function
      *
      * @param   array  $array   Named array
@@ -63,11 +76,11 @@ class JTableMarketplaceextensions extends JTable {
      */
     public function bind($array, $ignore = '')
     {
-        if (isset($array['types']) && is_array($array['types']))
+        if (isset($array['tags']) && is_array($array['tags']))
         {
             $registry = new JRegistry;
-            $registry->loadArray($array['types']);
-            $array['types'] = (string) $registry;
+            $registry->loadArray($array['tags']);
+            $array['tags'] = (string) $registry;
         }
 
         if (isset($array['images']) && is_array($array['images']))

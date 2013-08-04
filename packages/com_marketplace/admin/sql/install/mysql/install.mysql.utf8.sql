@@ -9,7 +9,7 @@ CREATE TABLE `#__marketplace_extensions` (
   `section` varchar(100) DEFAULT '',
   `display` varchar(10) DEFAULT '',
   `type` varchar(255) DEFAULT '',
-  `types` varchar(255) DEFAULT '',
+  `tags` varchar(255) DEFAULT '',
   `pathway` varchar(255) DEFAULT NULL,
   `author` varchar(100) DEFAULT NULL,
   `plan` varchar(30) DEFAULT NULL,

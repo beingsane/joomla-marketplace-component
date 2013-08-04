@@ -83,6 +83,7 @@ class MarketplaceViewRepositories extends JViewLegacy
 		JToolBarHelper::title(JText::_('COM_MARKETPLACE_HEADER_' . $this->getName()), 'marketplace.png');
 		
 		if ($this->canDo->get('repositories.manage.state') && !empty($this->items)) {
+            JToolbarHelper::custom($this->getName().'.reset','time','time',JText::_('COM_MARKETPLACE_BUTTON_RESET_TIMESTAMP'));
 			JToolbarHelper::archiveList($this->getName().'.archive');
 			JToolbarHelper::unpublishList($this->getName().'.unpublish');
 			JToolbarHelper::publishList($this->getName().'.publish');
