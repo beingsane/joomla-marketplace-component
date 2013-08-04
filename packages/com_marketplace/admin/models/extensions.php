@@ -101,7 +101,7 @@ class MarketplaceModelExtensions extends JModelList
 		
 		$type = $this->getState('filter.tags');
 		if (!empty($type)) {
-            $query->where('e.tags LIKE '. $this->_db->quote('%' . $this->_db->escape($type, true) . '%'));
+            $query->where('a.tags LIKE '. $this->_db->quote('%' . $this->_db->escape($type, true) . '%'));
 		}
 		
 		$category = $this->getState('filter.category');

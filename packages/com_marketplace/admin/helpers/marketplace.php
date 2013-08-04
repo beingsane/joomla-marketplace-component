@@ -76,7 +76,7 @@ class MarketplaceHelper
             $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		if (!empty($category)) {
-            $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
+            $query->where('e.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
 		}
 		if (!empty($author)) {
 			$query->where('e.author='.$db->quote($author));
@@ -122,7 +122,7 @@ class MarketplaceHelper
             $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		if (!empty($category)) {
-            $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
+            $query->where('e.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
 		}
 		if (!empty($author)) {
 			$query->where('e.author='.$db->quote($author));
@@ -185,7 +185,7 @@ class MarketplaceHelper
             $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 		}
 		if (!empty($category)) {
-            $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
+            $query->where('e.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
 		}
 		if (!empty($author)) {
 			$query->where('e.author='.$db->quote($author));
@@ -230,7 +230,7 @@ class MarketplaceHelper
 			$query->where('e.section='.$db->quote($section));
 		}
 		if (!empty($category)) {
-            $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
+            $query->where('e.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
 		}
 		if (!empty($author)) {
 			$query->where('e.author='.$db->quote($author));
@@ -305,7 +305,7 @@ class MarketplaceHelper
                 $query->where('e.tags LIKE '. $db->quote('%' . $db->escape($type, true) . '%'));
 			}
 			if (!empty($category)) {
-                $query->where('a.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
+                $query->where('e.pathway LIKE '. $db->quote('%' . $db->escape($category, true) . '%'));
 			}
 			$query->where('e.marketplace_repository_id='.$db->quote($repository->marketplace_repository_id));
 			$query->order('e.author');
