@@ -43,6 +43,7 @@ function updateRepository(url, data) {
 
 function updateRepositoryProgress()
 {
+    if (currentRepositoryIndex == repositories.length) return;
     jQuery('#repo_name').html(repositories[currentRepositoryIndex].name);
     jQuery('#repo_url').html(repositories[currentRepositoryIndex].location);
 }
@@ -50,12 +51,13 @@ function updateRepositoryProgress()
 function updateExtensionProgress(software)
 {
     var percent = Math.ceil( (parseFloat(software.repository.page / software.repository.pages) * 100) / repositories.length );
-    repositoryProgressbar.set(percent);
+    repositoryProgressbar.set( parseFloat(document.id('repositories').getAttribute('value')) + percent);
 }
 
 function checkQueue()
 {
     if (repositories.length == currentRepositoryIndex) {
+        updateRepositoryProgress();
         window.setTimeout(function(){ window.location = updater_return_url; },1000);
     } else {
         updateRepositoryProgress();
