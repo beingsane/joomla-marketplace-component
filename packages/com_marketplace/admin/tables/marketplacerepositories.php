@@ -66,18 +66,18 @@ class JTableMarketplacerepositories extends JTable {
             $site_uri = JUri::getInstance()->base();
             $http = new JHttp();
             $callback_function = 'mp';
-            $response  = $http->get($this->location,array('referer' => $site_uri, 'callback' => $callback_function));
+            $repository = JUri::getInstance($this->location);
+            $repository->setVar('callback', $callback_function);
+            $response = $http->get($repository,array('referer' => $site_uri));
             if (200 != $response->code)
             {
                 return $this->error($this->location, JText::sprintf('COM_MARKETPLACE_REPOSITORY_OPEN_URL', $url));
             }
-            
             if (strpos($response->body,$callback_function.'(') === false) {
-                return $this->error($this->location, JText::_('COM_MARKETPLACE_REPOSITORY_INVALID_RESPONSE'));
+                return $this->error($this->location, JText::_('COM_MARKETPLACE_REPOSITORY_RESPONSE_DONT_SUPPORT_JSONP'));
             }
-            
+            $response->body = substr($response->body,3,-1);
             $data = json_decode($response->body, true);
-
             if (is_null($data)) {
                 return $this->error($this->location, JText::_('COM_MARKETPLACE_REPOSITORY_INVALID_RESPONSE'));
             }
