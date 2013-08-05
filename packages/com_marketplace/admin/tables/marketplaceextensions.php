@@ -83,11 +83,11 @@ class JTableMarketplaceextensions extends JTable {
             $array['tags'] = (string) $registry;
         }
 
-        if (isset($array['images']) && is_array($array['images']))
+        if (isset($array['gallery']) && is_array($array['gallery']))
         {
             $registry = new JRegistry;
-            $registry->loadArray($array['images']);
-            $array['images'] = (string) $registry;
+            $registry->loadArray($array['gallery']);
+            $array['gallery'] = (string) $registry;
         }
 
         return parent::bind($array, $ignore);

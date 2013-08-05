@@ -28,11 +28,11 @@ defined('_JEXEC') or die;
             <?php echo nl2br($this->item->description); ?>
             <br />
 
-            <?php if (count($this->item->images) > 0): ?>
+            <?php if (count($this->item->gallery) > 0): ?>
                 <div class="row-fluid">
                     <ul class="thumbnails">
-                        <?php foreach ($this->item->images as $image): ?>
-                            <li class="span<?php echo floor(12 / count($this->item->images)); ?>">
+                        <?php foreach ($this->item->gallery as $image): ?>
+                            <li class="span<?php echo floor(12 / count($this->item->gallery)); ?>">
                                 <a class="thubmail">
                                     <img class="img-polaroid" src="<?php echo $image; ?>" />
                                 </a>
