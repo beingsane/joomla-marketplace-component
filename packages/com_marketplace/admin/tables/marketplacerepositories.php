@@ -39,7 +39,7 @@ class JTableMarketplacerepositories extends JTable {
         $db = $this->_db;
         $query = $db->getQuery(true)
             ->update('#__marketplace_repositories')
-            ->set('enabled = 0')
+            ->set('published = 0')
             ->where('location = ' . $db->quote($url));
         $db->setQuery($query);
         $db->execute();
@@ -65,11 +65,17 @@ class JTableMarketplacerepositories extends JTable {
         if (!$this->$key) {
             $site_uri = JUri::getInstance()->base();
             $http = new JHttp();
-            $response  = $http->get($this->location,array('referer' => $site_uri));
+            $callback_function = 'mp';
+            $response  = $http->get($this->location,array('referer' => $site_uri, 'callback' => $callback_function));
             if (200 != $response->code)
             {
                 return $this->error($this->location, JText::sprintf('COM_MARKETPLACE_REPOSITORY_OPEN_URL', $url));
             }
+            
+            if (strpos($response->body,$callback_function.'(') === false) {
+                return $this->error($this->location, JText::_('COM_MARKETPLACE_REPOSITORY_INVALID_RESPONSE'));
+            }
+            
             $data = json_decode($response->body, true);
 
             if (is_null($data)) {
