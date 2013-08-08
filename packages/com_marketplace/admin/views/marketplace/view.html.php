@@ -46,8 +46,8 @@ class MarketplaceViewMarketplace extends JViewLegacy
 		$this->setModel(JModelLegacy::getInstance('extensions','marketplacemodel'), true);
 
         $model = $this->getModel();
-        $model->setState('filter.purchased',0);
 		$this->state		 = $this->get('State');
+        $model->setState('filter.purchased',0);
 		$this->items		 = $this->get('Items');
 		$this->nr_extensions = $this->get('TotalExtensions');
 		$this->pagination	 = $this->get('Pagination');
