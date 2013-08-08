@@ -25,8 +25,9 @@
 	<administration>
 		<menu img="class:store">com_marketplace</menu>
 		<submenu>
-			<menu link="option=com_marketplace&amp;view=marketplace" view="marketplace" img="class:store-marketplace" alt="Marketplace/Marketplace">COM_MARKETPLACE_SUBMENU_MARKETPLACE</menu>
-			<menu link="option=com_marketplace&amp;view=repositories" view="repositories" img="class:store-repositories" alt="Marketplace/Repositories">COM_MARKETPLACE_SUBMENU_REPOSITORIES</menu>
+			<menu link="option=com_marketplace&amp;view=marketplace" view="marketplace" img="class:mp-marketplace" alt="Marketplace/Marketplace">COM_MARKETPLACE_SUBMENU_MARKETPLACE</menu>
+			<menu link="option=com_marketplace&amp;view=repositories" view="repositories" img="class:mp-repositories" alt="Marketplace/Repositories">COM_MARKETPLACE_SUBMENU_REPOSITORIES</menu>
+            <menu link="option=com_marketplace&amp;view=purchases" view="purchases" img="class:mp-purchase" alt="Marketplace/Purchases">COM_MARKETPLACE_SUBMENU_PURCHASES</menu>
 		</submenu>
 		<files folder="admin">
 			<filename>marketplace.php</filename>

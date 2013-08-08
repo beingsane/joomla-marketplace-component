@@ -63,7 +63,7 @@ class MarketplaceModelExtensions extends JModelList
 		$query  = $db->getQuery(true);
 
 		// Select the required fields from the updates table
-		$query->select('a.marketplace_extension_id, a.icon, a.name, a.tags, a.plan,a.pathway, a.author, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
+		$query->select('a.marketplace_extension_id, a.icon, a.name, a.tags, a.plan,a.pathway, a.author, a.purchased, a.purchased_date, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
 
 		$query->from($db->quoteName('#__marketplace_extensions').' AS a');
 		
@@ -103,6 +103,11 @@ class MarketplaceModelExtensions extends JModelList
 		if (!empty($type)) {
             $query->where('a.tags LIKE '. $this->_db->quote('%' . $this->_db->escape($type, true) . '%'));
 		}
+
+        $purchased = $this->getState('filter.purchased');
+        if (is_int($purchased)) {
+            $query->where('a.purchased='.$db->quote($purchased));
+        }
 		
 		$category = $this->getState('filter.category');
 		if (!empty($category)) {
@@ -144,6 +149,7 @@ class MarketplaceModelExtensions extends JModelList
 		$id	.= ':' . $this->getState('filter.category');
 		$id	.= ':' . $this->getState('filter.author');
 		$id	.= ':' . $this->getState('filter.plan');
+        $id	.= ':' . $this->getState('filter.purchased');
 		
 		return parent::getStoreId($id);
 	}
@@ -183,6 +189,9 @@ class MarketplaceModelExtensions extends JModelList
 		
 		$plan = $app->getUserStateFromRequest($this->context.'.filter.plan', 'filter_plan');
 		$this->setState('filter.plan', $plan);
+
+        $purchased = $app->getUserStateFromRequest($this->context.'.filter.purchased', 'filter_purchased');
+        $this->setState('filter.purchased', $purchased);
 
 		$this->setState('extension_message', $app->getUserState($this->context.'.extension_message'));
 		

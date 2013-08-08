@@ -16,6 +16,8 @@ CREATE TABLE `#__marketplace_extensions` (
   `plan` varchar(30) DEFAULT NULL,
   `folder` varchar(100) DEFAULT NULL,
   `client_id` tinyint(3) DEFAULT '0',
+  `purchased` tinyint(3) DEFAULT '0',
+  `purchased_date` timestamp NULL DEFAULT NULL,
   `description` text,
   `gallery` text,
   `version` varchar(100) DEFAULT '',

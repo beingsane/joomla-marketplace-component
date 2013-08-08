@@ -71,7 +71,7 @@ class MarketplaceModelExtension extends JModelLegacy
             $extension_id = JFactory::getApplication()->input->getInt('id');
 
             // Select the required fields from the updates table
-            $query->select('a.marketplace_extension_id, a.name, a.icon, a.tags, a.pathway, a.plan,a.author, a.description, a.images, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
+            $query->select('a.marketplace_extension_id, a.name, a.icon, a.tags, a.pathway, a.plan,a.author, a.description, a.gallery, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
             $query->from($db->quoteName('#__marketplace_extensions').' AS a');
             // Join installed extensions
             $query->select('e.extension_id');

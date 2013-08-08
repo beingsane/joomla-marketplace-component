@@ -35,6 +35,11 @@ class MarketplaceHelper
 			'index.php?option=com_marketplace&view=marketplace',
 			$vName == 'marketplace'
 		);
+        JHtmlSidebar::addEntry(
+            JText::_('COM_MARKETPLACE_SUBMENU_PURCHASES'),
+            'index.php?option=com_marketplace&view=purchases',
+            $vName == 'purchases'
+        );
 		if ($user->authorise('repositories.manage','com_marketplace')) {
 			JHtmlSidebar::addEntry(
 				JText::_('COM_MARKETPLACE_SUBMENU_REPOSITORIES'),
@@ -138,19 +143,37 @@ class MarketplaceHelper
 		return $options;
 	}
 
+    /**
+     * Total repositories
+     *
+     * @since	3.1
+     */
+    public static function getExtensionTotalStores()
+    {
+        $db = JFactory::getDBO();
+        $query = $db->getQuery(true);
+
+        $query->select('COUNT(s.marketplace_repository_id)');
+        $query->from('#__marketplace_repositories AS s');
+        $query->where('s.published>=1');
+        $db->setQuery($query);
+
+        return $db->loadResult();
+    }
+
 	/**
 	 * Total repositories
 	 * 
 	 * @since	3.1
 	 */
-	public static function getExtensionTotalStores()
+	public static function getTotalPurchasedExtensions()
 	{
 		$db = JFactory::getDBO();
 		$query = $db->getQuery(true);
 		
-		$query->select('COUNT(s.marketplace_repository_id)');
-		$query->from('#__marketplace_repositories AS s');
-		$query->where('s.published>=1');
+		$query->select('COUNT(s.marketplace_extension_id)');
+		$query->from('#__marketplace_extensions AS s');
+		$query->where('s.purchased=1');
 		$db->setQuery($query);
 		
 		return $db->loadResult();

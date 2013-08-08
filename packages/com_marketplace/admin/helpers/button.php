@@ -51,11 +51,15 @@ class MarketplaceHelperButton
 	 * @since	3.1
 	 */
 	static public function download($extension)
-	{	
+	{
 		$button = $extension->plan;
 		$href = 'javascript:void(0);';
         $target= '_self';
 		if ($extension->extension_id == 0) {
+            if ($extension->purchased) {
+                $extension->plan = 'register';
+                $button = $extension->plan;
+            }
 			switch (strtolower($extension->plan)) {
 				case 'register':
 					$btn_class = ' btn-warning';

@@ -44,6 +44,9 @@ class MarketplaceViewMarketplace extends JViewLegacy
 	{
 		// Get data from the model
 		$this->setModel(JModelLegacy::getInstance('extensions','marketplacemodel'), true);
+
+        $model = $this->getModel();
+        $model->setState('filter.purchased',0);
 		$this->state		 = $this->get('State');
 		$this->items		 = $this->get('Items');
 		$this->nr_extensions = $this->get('TotalExtensions');
@@ -132,7 +135,7 @@ class MarketplaceViewMarketplace extends JViewLegacy
 		}
 		
 		if ($countStores == 0) {
-			JFactory::getApplication()->redirect('index.php?option=com_marketplace&view=repositories');
+			JFactory::getApplication()->redirect('index.php?option=com_marketplace&view=repositories', JText::_('COM_MARKETPLACE_MSG_REPOSITORIES_NO_REPOSITORIES'),'warning');
 		}
 		
 		MarketplaceHelper::addSubmenu($this->getName());

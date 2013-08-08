@@ -138,9 +138,10 @@ class MarketplaceModelRepository extends JModelAdmin
         }
 
         if (!empty($last_check_timestamp)) {
+            $date = new JDate($last_check_timestamp);
             $repository = JTable::getInstance('marketplacerepositories');
             $repository->load($marketplace_repository_id);
-            $repository->last_check_timestamp = $last_check_timestamp;
+            $repository->last_check_timestamp = $date->toSql();
             $response['result'] = $repository->store();
         }
 

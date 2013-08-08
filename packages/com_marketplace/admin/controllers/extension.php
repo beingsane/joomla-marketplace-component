@@ -37,9 +37,7 @@ class MarketplaceControllerExtension extends JControllerLegacy
 		if (!$url) {
 			$url = 'index.php?option=com_marketplace';
 		} else {
-			$url = 'index.php?option=com_installer&view=install&install_url='.base64_encode($url);
+
 		}
-		
-		$this->setRedirect($url);
 	}
 }
