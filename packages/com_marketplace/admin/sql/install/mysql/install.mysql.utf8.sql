@@ -25,6 +25,7 @@ CREATE TABLE `#__marketplace_extensions` (
   `rating` float(11,2) NOT NULL DEFAULT '0.00',
   `item_url` varchar(255) NOT NULL DEFAULT '',
   `author_url` varchar(255) NOT NULL DEFAULT '',
+  `demo_url` varchar(255) NOT NULL DEFAULT '',
   `details_url` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`marketplace_extension_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='Marketplace Extensions';
