@@ -8,44 +8,53 @@
  */
 
 defined('_JEXEC') or die;
+$pathway = explode('/',$this->item->pathway);
+$default_thumbnail = '../media/com_marketplace/images/460x345_thumbnail.gif';
+if (empty($this->item->thumbnail)) {
+    $this->item->thumbnail = $default_thumbnail;
+}
 ?>
 <div class="row-fluid">
-    <div class="span12 well well-small">
-        <div class="page-header">
-            <h1><?php echo $this->item->name; ?></h1>
-            <small>
-                   <?php echo JText::sprintf('COM_MARKETPLACE_TEXT_BY_AUTHOR',$this->item->author); ?>
-                   <br />
-                   <?php echo JText::sprintf('COM_MARKETPLACE_TEXT_VERSION',$this->item->version); ?>
-            </small>
+
+    <div class="span3">
+        <img class="img-polaroid" src="<?php echo $this->item->thumbnail; ?>" onerror="this.value='<?php echo $default_thumbnail; ?>'" />
+        <br />
+        <br />
+        <div class="row">
+            <div class="span3">
+
+            </div>
+            <div class="span8 pull-right">
+                <?php echo MarketplaceHelperButton::download($this->item,' btn-large btn-block'); ?>
+            </div>
         </div>
-
-
-            <img class="img-polaroid" src="<?php echo $this->item->icon; ?>" />
-            <br />
-            <small><?php echo MarketplaceHelperRating::rating($this->item->rating); ?><i class='icon-comment'></i> <?php echo $this->item->reviews;?></small>
-            <br />
-            <?php echo nl2br($this->item->description); ?>
-            <br />
-
-            <?php if (count($this->item->gallery) > 0): ?>
-                <div class="row-fluid">
-                    <ul class="thumbnails">
-                        <?php foreach ($this->item->gallery as $image): ?>
-                            <li class="span<?php echo floor(12 / count($this->item->gallery)); ?>">
-                                <a class="thubmail">
-                                    <img class="img-polaroid" src="<?php echo $image; ?>" />
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-
-
-            <a href="<?php echo $this->item->details_url; ?>" target="_blank" class="btn"><?php echo JText::_('COM_MARKETPLACE_TEXT_INFO_URL'); ?></a>
-            <a href="<?php echo $this->item->author_url; ?>" target="_blank" class="btn"><?php echo JText::_('COM_MARKETPLACE_TEXT_AUTHOR_URL'); ?></a>
-            <?php echo MarketplaceHelperButton::download($this->item); ?>
+        <br />
+        <?php echo JText::_('COM_MARKETPLACE_TEXT_RATING'); ?>: <?php echo MarketplaceHelperRating::rating($this->item->rating); ?>
+        <br />
+        <?php echo JText::sprintf('COM_MARKETPLACE_TEXT_CATEGORY', end($pathway)); ?>
+        <br />
+        <?php echo JText::sprintf('COM_MARKETPLACE_TEXT_VERSION',$this->item->version); ?>
 
     </div>
+    <div class="span9">
+        <div class="page-header">
+            <h1><?php echo $this->item->name; ?> <small><?php echo JText::sprintf('COM_MARKETPLACE_TEXT_BY_AUTHOR',$this->item->author); ?></small></h1>
+        </div>
+        <ul class="nav nav-pills">
+            <li>
+                <a href="<?php echo $this->item->details_url; ?>" target="_blank"><?php echo JText::_('COM_MARKETPLACE_TEXT_INFO_URL'); ?></a>
+            </li>
+            <li><a href="<?php echo $this->item->demo_url; ?>" target="_blank"><?php echo JText::_('COM_MARKETPLACE_TEXT_DEMO_URL'); ?></a></li>
+            <li><a href="<?php echo $this->item->author_url; ?>" target="_blank"><?php echo JText::_('COM_MARKETPLACE_TEXT_AUTHOR_URL'); ?></a></li>
+        </ul>
+        <hr>
+        <p><?php echo nl2br($this->item->description); ?></p>
+        <br />
+
+
+
+    </div>
+
+
+
 </div>

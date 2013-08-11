@@ -21,6 +21,7 @@
 	</uninstall>
 	<media destination="com_marketplace" folder="media">
 		<folder>js</folder>
+        <folder>images</folder>
 	</media>
 	<administration>
 		<menu img="class:store">com_marketplace</menu>

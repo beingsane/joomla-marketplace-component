@@ -264,9 +264,11 @@ class MarketplaceHelper
 		
 		$options = array();
         $types = array();
-		foreach ($extensions as $extension) {
-            $types = array_merge($types, json_decode($extension->tags, true));
-		}
+        if (!empty($extension->tags)) {
+            foreach ($extensions as $extension) {
+                $types = array_merge($types, json_decode($extension->tags, true));
+            }
+        }
         $types = array_unique($types);
         $types = array_filter($types);
         foreach ($types as $type) {

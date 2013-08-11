@@ -8,27 +8,45 @@
  */
 
 defined('_JEXEC') or die;
+$default_icon = '../media/com_marketplace/images/128x128_icon.gif';
 ?>
+<table class="table table-striped table-bordered">
 <?php $nr = 1; foreach ($this->items as $extension): ?>
+    <?php
+    if (empty($extension->icon)) {
+        $extension->icon = $default_icon;
+    }
+    ?>
 <?php if ($nr == 1): ?>
-<div class="row-fluid">
+<tr>
 <?php endif; ?>
-<div class="span3 well well-small">
+<td>
+    <div class="row-fluid">
 		<div class="span3">
-			<a href="index.php?option=com_marketplace&view=extension&id=<?php echo $extension->marketplace_extension_id; ?>"><img class="img-rounded" src="<?php echo $extension->icon; ?>" /></a>
+			<a href="index.php?option=com_marketplace&view=extension&id=<?php echo $extension->marketplace_extension_id; ?>"><img class="img-rounded" src="<?php echo $extension->icon; ?>" onerror="this.value='<?php echo $default_icon; ?>'" /></a>
 		</div>
-		<div class="span6">
+		<div class="span8">
 			<a href="index.php?option=com_marketplace&view=extension&id=<?php echo $extension->marketplace_extension_id; ?>"><strong><?php echo $extension->name; ?></strong></a>
 			<br />
-			<i class="icon-user"></i><?php echo JText::sprintf('COM_MARKETPLACE_'.$this->getName().'_EXTENSIONS_INFO', $extension->author); ?>
+			<?php echo $extension->author; ?>
 			<br />
 			<small><?php echo MarketplaceHelperRating::rating($extension->rating); ?> <i class='icon-comment'></i> <?php echo $extension->reviews;?></small>
 			<br />
 			<?php echo MarketplaceHelperButton::download($extension); ?>
 		</div>
-		<br clear="all" />
-</div>
+    </div>
+</td>
 <?php if ($nr == 4): ?>
-</div>
+</tr>
 <?php $nr = 0; endif; ?>
 <?php $nr++; endforeach; ?>
+    <?php if ($nr > 1): ?>
+<?php for (;$nr <= 4;$nr++): ?>
+    <td><div class="row-fluid"><div class="span3"></div><div class="span8"></div></div></td>
+<?php endfor; ?>
+<?php if ($nr == 4): ?>
+</tr>
+<?php $nr = 0; endif; ?>
+    <?php endif; ?>
+
+</table>

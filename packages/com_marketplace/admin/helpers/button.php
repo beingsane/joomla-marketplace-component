@@ -50,7 +50,7 @@ class MarketplaceHelperButton
 	 * 
 	 * @since	3.1
 	 */
-	static public function download($extension)
+	static public function download($extension,$btn_class = '')
 	{
 		$button = $extension->plan;
 		$href = 'javascript:void(0);';
@@ -62,30 +62,30 @@ class MarketplaceHelperButton
             }
 			switch (strtolower($extension->plan)) {
 				case 'register':
-					$btn_class = ' btn-warning';
+					$btn_class .= ' btn-warning';
                     $href = $extension->item_url;
                     $target= '_blank';
 					break;
 				case 'buy':
-					$btn_class = ' btn-success';
+					$btn_class .= ' btn-success';
                     $href = $extension->item_url;
                     $target= '_blank';
 					break;
 				case 'install':
-					$btn_class = ' btn-info';
+					$btn_class .= ' btn-info';
                     $href = $extension->item_url;
 					break;
 				default:
-					$btn_class = '';
+					$btn_class .= '';
 					break;
 			}
 		} else {
             if ($extension->update_id) {
-                $btn_class = ' btn-primary';
+                $btn_class .= ' btn-primary';
                 $button = 'update';
                 $href = "javascript:document.id('option').value='com_installer';document.id('cid').value='{$extension->update_id}';Joomla.submitbutton('update.update');";
             } else {
-                $btn_class = ' disabled';
+                $btn_class .= ' disabled';
                 $button='installed';
             }
 		}
