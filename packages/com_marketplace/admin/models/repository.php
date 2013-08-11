@@ -165,8 +165,15 @@ class MarketplaceModelRepository extends JModelAdmin
             ->where('marketplace_repository_id IN ('.implode(',',$cids).')');
         $db->setQuery($query);
         $db->execute();
-
         $return = $db->getAffectedRows();
+
+        $query = $db->getQuery(true)
+            ->delete('#__marketplace_extensions')
+            ->where('marketplace_repository_id IN ('.implode(',',$cids).')');
+        $db->setQuery($query);
+        $db->execute();
+
+
         JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_MARKETPLACE_REPOSITORIES_N_ITEMS_RESET',$return));
         return $return;
     }

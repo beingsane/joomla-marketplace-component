@@ -56,7 +56,7 @@ class MarketplaceHelperButton
 		$href = 'javascript:void(0);';
         $target= '_self';
 		if ($extension->extension_id == 0) {
-            if ($extension->purchased) {
+            if ($extension->purchased && $extension->plan == 'buy') {
                 $extension->plan = 'register';
                 $button = $extension->plan;
             }
@@ -73,7 +73,7 @@ class MarketplaceHelperButton
 					break;
 				case 'install':
 					$btn_class = ' btn-info';
-					$href = 'index.php?option=com_marketplace&task=extension.install&eid='.$extension->marketplace_extension_id.'&'.JSession::getFormToken().'=1';
+                    $href = $extension->item_url;
 					break;
 				default:
 					$btn_class = '';

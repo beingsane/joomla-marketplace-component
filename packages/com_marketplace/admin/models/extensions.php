@@ -63,7 +63,7 @@ class MarketplaceModelExtensions extends JModelList
 		$query  = $db->getQuery(true);
 
 		// Select the required fields from the updates table
-		$query->select('a.marketplace_extension_id, a.icon, a.name, a.tags, a.plan,a.pathway, a.author, a.purchased, a.purchased_date, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
+		$query->select('a.marketplace_extension_id, a.icon, a.thumbnail, a.name, a.tags, a.plan, a.display, a.pathway, a.author, a.purchased, a.purchased_date, a.version, a.reviews, a.rating, a.item_url, a.author_url, a.details_url');
 
 		$query->from($db->quoteName('#__marketplace_extensions').' AS a');
 		

@@ -22,6 +22,7 @@ function updateRepository(url, data) {
                                 var nextPage = parseInt(software.repository.page) + 1;
                                 updateRepository(url,{page: nextPage, rv: rel_version, timestamp: repositories[currentRepositoryIndex].last_check_timestamp});
                             } else {
+                                updateExtensionProgress(software);
                                 currentRepositoryIndex++;
                                 window.setTimeout("checkQueue()",1000);
                             }
@@ -57,7 +58,6 @@ function updateExtensionProgress(software)
 function checkQueue()
 {
     if (repositories.length == currentRepositoryIndex) {
-        updateRepositoryProgress();
         window.setTimeout(function(){ window.location = updater_return_url; },1000);
     } else {
         updateRepositoryProgress();
