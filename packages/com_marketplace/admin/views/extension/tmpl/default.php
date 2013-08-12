@@ -50,11 +50,5 @@ if (empty($this->item->thumbnail)) {
         <hr>
         <p><?php echo nl2br($this->item->description); ?></p>
         <br />
-
-
-
     </div>
-
-
-
 </div>

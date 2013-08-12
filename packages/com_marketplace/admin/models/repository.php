@@ -82,55 +82,8 @@ class MarketplaceModelRepository extends JModelAdmin
             }
 
             $current_update = JTable::getInstance('marketplaceextensions');
-            $marketExtensions = JTable::getInstance('marketplaceextensions');
-            $extension = JTable::getInstance('extension');
-
             $current_update->bind($extensionData);
-
-            $uid = $marketExtensions->find(array(
-                'identifier' => strtolower($extensionData['identifier']),
-                'type' => strtolower($extensionData['type']),
-                'client_id' => strtolower($extensionData['client_id']),
-                'folder' => strtolower($extensionData['folder']),
-                'sku' => strtolower($extensionData['sku'])
-            ));
-
-            $eid = $extension->find(array(
-                'element' => strtolower($extensionData['identifier']),
-                'type' => strtolower($extensionData['type']),
-                'client_id' => strtolower($extensionData['client_id']),
-                'folder' => strtolower($extensionData['folder'])
-            ));
-            if (!$uid)
-            {
-                // Set the extension_id id
-                if ($eid)
-                {
-                    // We have an installed extension, check the update is actually newer
-                    $extension->load($eid);
-                    $data = json_decode($extension->manifest_cache, true);
-                    if (version_compare($marketExtensions->version, $data['version'], '>') == 1)
-                    {
-                        $marketExtensions->extension_id = $eid;
-                        $response['result'] = $current_update->store();
-                    }
-                }
-                else
-                {
-                    // A potentially new extension to be installed
-                    $response['result'] = $current_update->store();
-                }
-            }
-            else
-            {
-                $current_update->setKey($uid);
-
-                // If there is an update, check that the version is newer then replaces
-                if (version_compare($current_update->version, $marketExtensions->version, '>') == 1)
-                {
-                    $response['result'] = $current_update->store();
-                }
-            }
+            $response['result'] = $current_update->store();
 
             if (!$response['result']) {
                 return $response;

@@ -51,8 +51,13 @@ function updateRepositoryProgress()
 
 function updateExtensionProgress(software)
 {
-    var percent = Math.ceil( (parseFloat(software.repository.page / software.repository.pages) * 100) / repositories.length );
-    repositoryProgressbar.set( parseFloat(document.id('repositories').getAttribute('value')) + percent);
+    var percent = (parseFloat(software.repository.page / software.repository.pages) * 100) / repositories.length;
+    console.log(percent)
+    if (repositories.length > 1) {
+        repositoryProgressbar.set( parseFloat(document.id('repositories').getAttribute('value')) + percent);
+    } else {
+        repositoryProgressbar.set(percent);
+    }
 }
 
 function checkQueue()
