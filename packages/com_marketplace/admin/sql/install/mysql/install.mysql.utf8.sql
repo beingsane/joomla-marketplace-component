@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `#__marketplace_extensions`;
 CREATE TABLE `#__marketplace_extensions` (
   `marketplace_extension_id` int(11) NOT NULL AUTO_INCREMENT,
   `marketplace_repository_id` int(11) DEFAULT '0',
-  `sku` int(11) NOT NULL,
+  `ref_id` varchar(255) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `thumbnail` varchar(255) DEFAULT NULL,

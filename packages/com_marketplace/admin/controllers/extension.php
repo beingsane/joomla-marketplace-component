@@ -10,7 +10,7 @@
 defined('_JEXEC') or die;
 
 /**
- * Extension Store Controller
+ * Extension Marketplace Controller
  *
  * @package     Joomla.Administrator
  * @subpackage  com_marketplace
@@ -18,26 +18,5 @@ defined('_JEXEC') or die;
  */
 class MarketplaceControllerExtension extends JControllerLegacy
 {
-	/**
-	 * Prepare to install by url
-	 *
-	 * @return  void
-	 * 
-	 * @since	3.1
-	 */
-	public function install()
-	{
-		// Check for request forgeries
-		JSession::checkToken('get') or jexit(JText::_('JINVALID_TOKEN'));
-		
-		$model = $this->getModel('extension');
-		$extension_id = $this->input->getInt('eid');
-		$url = $model->getLink($extension_id);
-		
-		if (!$url) {
-			$url = 'index.php?option=com_marketplace';
-		} else {
 
-		}
-	}
 }

@@ -32,6 +32,7 @@
 		</submenu>
 		<files folder="admin">
 			<filename>marketplace.php</filename>
+            <filename>restore.php</filename>
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
 			<filename>controller.php</filename>
