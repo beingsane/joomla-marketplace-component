@@ -41,11 +41,17 @@ if (empty($this->item->thumbnail)) {
             <h1><?php echo $this->item->name; ?> <small><?php echo JText::sprintf('COM_MARKETPLACE_TEXT_BY_AUTHOR',$this->item->author); ?></small></h1>
         </div>
         <ul class="nav nav-pills">
+            <?php if (!empty($this->item->details_url)): ?>
             <li>
                 <a href="<?php echo $this->item->details_url; ?>" target="_blank"><?php echo JText::_('COM_MARKETPLACE_TEXT_INFO_URL'); ?></a>
             </li>
+            <?php endif; ?>
+            <?php if (!empty($this->item->demo_url)): ?>
             <li><a href="<?php echo $this->item->demo_url; ?>" target="_blank"><?php echo JText::_('COM_MARKETPLACE_TEXT_DEMO_URL'); ?></a></li>
+            <?php endif; ?>
+            <?php if (!empty($this->item->author_url)): ?>
             <li><a href="<?php echo $this->item->author_url; ?>" target="_blank"><?php echo JText::_('COM_MARKETPLACE_TEXT_AUTHOR_URL'); ?></a></li>
+            <?php endif; ?>
         </ul>
         <hr>
         <p><?php echo nl2br($this->item->description); ?></p>

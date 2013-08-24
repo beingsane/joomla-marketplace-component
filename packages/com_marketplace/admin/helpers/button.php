@@ -56,7 +56,7 @@ class MarketplaceHelperButton
 		$href = 'javascript:void(0);';
         $target= '_self';
 		if ($extension->extension_id == 0) {
-            if ($extension->purchased && $extension->plan == 'buy') {
+            if (isset($extension->purchased) && $extension->purchased && $extension->plan == 'buy') {
                 $extension->plan = 'register';
                 $button = $extension->plan;
             }

@@ -83,16 +83,13 @@ class MarketplaceModelRepository extends JModelAdmin
 
             $current_update = JTable::getInstance('marketplaceextensions');
             $uid = $current_update->find(array(
-                'identifier' => strtolower($extensionData['identifier']),
-                'type' => strtolower($extensionData['type']),
-                'client_id' => strtolower($extensionData['client_id']),
-                'folder' => strtolower($extensionData['folder']),
                 'ref_id' => strtolower($extensionData['ref_id']),
                 'marketplace_repository_id' => $marketplace_repository_id
             ));
+
             //update a extension data
-            if (!$uid) {
-                $current_update->setKey($uid);
+            if (intval($uid) > 0) {
+                $current_update->marketplace_extension_id = $uid;
             }
             $response['result'] = $current_update->save($extensionData);
 
